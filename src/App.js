@@ -1,16 +1,18 @@
+import React from "react";
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import './App.css';
-import { Route, Router, Routes } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import theme from './theme';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 
 const App =() =>(
-  <ThemeProvider>
+  <ThemeProvider theme={theme}>
     <CssBaseline/>
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<HomePage/>} />
+        <Route path="/login" element={<LoginPage/>} />
       </Routes>
     </Router>
   </ThemeProvider>
