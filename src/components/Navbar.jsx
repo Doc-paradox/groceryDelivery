@@ -1,6 +1,6 @@
-import { alpha, AppBar, Button, InputBase, Stack, styled, Toolbar, Typography } from '@mui/material'
+import { alpha, AppBar, InputBase, Stack, styled, Toolbar, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -77,7 +77,10 @@ const Navbar = () => {
 
     const navigate = useNavigate();
 
-    const handleLoginOpen = () => {
+    const handleSignup= () => {
+        navigate("/signup")
+    }
+    const handleLogin= () => {
         navigate("/login")
     }
 
@@ -102,10 +105,10 @@ const Navbar = () => {
                     <Typography>
                         Category
                     </Typography>
-                    <YellowButton >
+                    <YellowButton onClick={handleSignup}>
                         Sign up
                     </YellowButton>
-                    <WhiteButton variant="outlined" onClick={handleLoginOpen}>
+                    <WhiteButton variant="outlined" onClick={handleLogin}>
                         Log in
                     </WhiteButton>
                 </Toolbar>
