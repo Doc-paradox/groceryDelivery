@@ -1,4 +1,4 @@
-import { alpha, AppBar, InputBase, Stack, styled, Toolbar, Typography } from '@mui/material'
+import { alpha, AppBar, InputBase, styled, Toolbar, Typography } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';

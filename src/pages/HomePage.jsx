@@ -4,12 +4,11 @@ import styled from 'styled-components';
 import { Box, Grid, Paper, Typography } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 
-const Header = styled('Typography')(({ theme }) => ({
-    fontfamily: 'Arial',
-    fontWeight: 'bolder',
-    fontSize: '7vh',
-
-}))
+// const Header = styled('Typography')(({ theme }) => ({
+//     fontfamily: 'Arial',
+//     fontWeight: 'bolder',
+//     fontSize: '7vh',
+// }))
 
 const ContainerBox = styled('Box')(({ theme }) => ({
     width: '35vh',
@@ -23,7 +22,8 @@ const ContainerBox = styled('Box')(({ theme }) => ({
 const images = [
     "https://www.blinkco.io/wp-content/uploads/2022/01/shopping-cart-full-of-food-on-yellow-background-g-2021-09-02-09-26-59-utc-1.jpg",
     "https://149449856.v2.pressablecdn.com/wp-content/uploads/2020/07/Vegetables-in-Bag.jpg",
-    "https://tse1.mm.bing.net/th/id/OIP.S48O7hnSHjdsyfvH09q_uQHaHa?pid=ImgDet&w=179&h=179&c=7&dpr=1.3"
+    "https://images.pexels.com/photos/3962292/pexels-photo-3962292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "https://plus.unsplash.com/premium_photo-1661321009372-4bbd48f64550?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 ];
 
 
@@ -42,16 +42,16 @@ const HomePage = () => {
                 Welcome to GroveGo!
             </Typography>
 
-            <Box sx={{ width: '80%', height: '25vh', margin: '0 auto', }}>
+            <Box sx={{ width: '85%', margin: '0 auto',overflow:'hidden' }}>
                 <Carousel>
                     {images.map((image, i) => (
-                        <Paper key={i} elevation={10} sx={{ boxShadow: 'none' }}>
+                        <Paper key={i} elevation={20} sx={{ boxShadow: 'none' }}>
                             <Box
                                 component="img"
                                 sx={{
                                     width: '100%',
-                                    height: '30vh',
-                                    objectFit: 'fit'
+                                    height:'55vh',
+                                    objectFit: 'cover'
                                 }}
                                 src={image}
                                 alt={`Slide ${i}`}
@@ -107,6 +107,7 @@ const HomePage = () => {
                     </Grid>
                 ))}
             </Grid> */}
+            
 
         </Box>
 
@@ -115,3 +116,5 @@ const HomePage = () => {
 }
 
 export default HomePage;
+
+
