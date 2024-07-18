@@ -11,11 +11,13 @@ const Header = styled('Typography')(({ theme }) => ({
 
 }))
 
-const ContainerBox = styled('Box')(({theme})=>({
-    width:'35vh',
+const ContainerBox = styled('Box')(({ theme }) => ({
+    width: '35vh',
     height: '45vh',
-    boxShadow:'-moz-initial',
-    backgroundColor: 'white'
+    boxShadow: '-moz-initial',
+    backgroundColor: 'white',
+    borderRadius: "5%",
+    textAlign: 'center',
 }))
 
 const images = [
@@ -29,7 +31,6 @@ const images = [
 const HomePage = () => {
     return (
         <Box>
-
             <Navbar />
             <Typography sx={{
                 fontFamily: 'Arial',
@@ -41,10 +42,10 @@ const HomePage = () => {
                 Welcome to GroveGo!
             </Typography>
 
-            <Box sx={{width:'80%',height:'25vh',marginLeft:'10%'}}>
+            <Box sx={{ width: '80%', height: '25vh', margin: '0 auto', }}>
                 <Carousel>
                     {images.map((image, i) => (
-                        <Paper key={i} elevation={10} sx={{boxShadow:'none'}}>
+                        <Paper key={i} elevation={10} sx={{ boxShadow: 'none' }}>
                             <Box
                                 component="img"
                                 sx={{
@@ -59,11 +60,54 @@ const HomePage = () => {
                     ))}
                 </Carousel>
             </Box>
-            <Box sx={{width:'80%',height:'25vh',marginLeft:'10%',marginTop:'10%',display:'flex',flexDirection:'row',justifyContent:'space-evenly'}}>
-                <ContainerBox>Fruit vegetables</ContainerBox>
-                <ContainerBox>Fruit vegetables</ContainerBox>
-                <ContainerBox>Fruit vegetables</ContainerBox>
-            </Box>
+            <Grid container spacing={2} columnGap={5} >
+
+                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '10%' }}>
+                    <ContainerBox >Fruit vegetables</ContainerBox>
+                    <ContainerBox>Fruit vegetables</ContainerBox>
+                    <ContainerBox>Fruit vegetables</ContainerBox>
+                </Box>
+
+                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '15%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '10%' }}>
+                    <ContainerBox >Fruit vegetables</ContainerBox>
+                    <ContainerBox>Fruit vegetables</ContainerBox>
+                    <ContainerBox>Fruit vegetables</ContainerBox>
+                </Box>
+                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '15%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '10%' }}>
+                    <ContainerBox >Fruit vegetables</ContainerBox>
+                    <ContainerBox>Fruit vegetables</ContainerBox>
+                    <ContainerBox>Fruit vegetables</ContainerBox>
+                </Box>
+                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '15%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '10%' }}>
+                    <ContainerBox >Fruit vegetables</ContainerBox>
+                    <ContainerBox>Fruit vegetables</ContainerBox>
+                    <ContainerBox>Fruit vegetables</ContainerBox>
+                </Box>
+            </Grid>
+
+            {/* <Grid container spacing={4}
+                sx={{
+                    width: '80%',
+                    height: '25vh',
+                    marginLeft: '10%',
+                    marginTop: '10%',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly'
+                }}>
+                {[1, 2, 3, 4].map((row) => (
+                    <Grid item xs={12} key={row}>
+                        <Grid container spacing={2} justifyContent="center">
+                            {[1, 2, 3].map((col) => (
+                                <Grid item xs={12} sm={3} key={`${row}-${col}`}>
+                                    <ContainerBox>Fruit vegetables</ContainerBox>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </Grid>
+                ))}
+            </Grid> */}
+
         </Box>
 
 

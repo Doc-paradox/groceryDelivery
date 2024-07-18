@@ -86,8 +86,6 @@ const Navbar = () => {
 
     return (
         <AppBar position="sticky">
-            <Stack>
-
                 <Toolbar>
                     <Typography variant="h6" noWrap component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, marginLeft: "5%" }}>
@@ -112,8 +110,6 @@ const Navbar = () => {
                         Log in
                     </WhiteButton>
                 </Toolbar>
-            </Stack>
-
         </AppBar>
     )
 }

@@ -6,6 +6,7 @@ import theme from './theme';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from "./pages/SignupPage";
+import userDashboard from "./pages/user/userDashboard";
 
 const App =() =>(
   <ThemeProvider theme={theme}>
@@ -15,6 +16,7 @@ const App =() =>(
         <Route path="/" element={<HomePage/>} />
         <Route path="/signup" element={<SignupPage/>}/>
         <Route path="/login" element={<LoginPage/>} />
+        <Route path="/user" element={<userDashboard/>}/>
       </Routes>
     </Router>
   </ThemeProvider>
