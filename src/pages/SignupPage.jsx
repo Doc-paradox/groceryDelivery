@@ -6,25 +6,26 @@ import axios from 'axios';
 
 
 const SignupPage = () => {
-  const [userType, setUserType] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [userrole, setUserRole] = useState('');
+  const [useremail, setUserEmail] = useState('');
+  const [userpassword, setUserPassword] = useState('');
   const navigate = useNavigate();
 
-  const userTypes =['User','Vendor','Delivery Person']
+  const userTypes =['user','vendor','delivery Person']
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
         const response = await axios.post('/USERS/addUser', {
-            USERROLE: userType,
-            USEREMAIL: email,
-            USERPASSWORD: password,
+            userrole: userrole,
+            useremail: useremail,
+            userpassword: userpassword,
         });
 
         const data = response.data;
         if (response.status === 200) {
             // Redirect to login page or dashboard after successful signup
             navigate('/login');
+            alert("Sign up successful")
         } else {
             console.error('Signup failed', data);
         }
@@ -42,9 +43,9 @@ const SignupPage = () => {
         <InputLabel id ="user-type-label">userType</InputLabel>
         <Select
          labelId="user-type-label"
-          value={userType}
+          value={userrole}
           label="User Type"
-          onChange={(e) => setUserType(e.target.value)}
+          onChange={(e) => setUserRole(e.target.value)}
         >
             {userTypes.map((type) => (
                 <MenuItem key={type} value={type}>{type}</MenuItem>
@@ -56,8 +57,8 @@ const SignupPage = () => {
         label="Email"
         variant="outlined"
         margin="normal"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={useremail}
+        onChange={(e) => setUserEmail(e.target.value)}
       />
       <TextField
         fullWidth
@@ -65,8 +66,8 @@ const SignupPage = () => {
         type="password"
         variant="outlined"
         margin="normal"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={userpassword}
+        onChange={(e) => setUserPassword(e.target.value)}
       />
       <Button 
         type="submit"

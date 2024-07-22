@@ -20,8 +20,8 @@ const App =() =>(
         <Route path="/" element={<HomePage/>} />
         <Route path="/signup" element={<SignupPage/>}/>
         <Route path="/login" element={<LoginPage/>} />   
-        <Route path="/login/user" element={<UserDashboard/>}/>
-        <Route path="/login/vendor" element={<VendorDashboard/>}/>
+        <Route path="/user" element={<UserDashboard/>}/>
+        <Route path="/vendor" element={<VendorDashboard/>}/>
       </Routes>
     </Router>
   </ThemeProvider>

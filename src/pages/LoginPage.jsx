@@ -6,8 +6,8 @@ import axios from 'axios';
 
 
 const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [useremail, setUserEmail] = useState('');
+  const [userpassword, setUserPassword] = useState('');
   const navigate = useNavigate();
 
 
@@ -15,30 +15,36 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post('/USERS/login', {
-        USEREMAIL: email,
-        USERPASSWORD: password,
+        useremail: useremail,
+        userpassword: userpassword,
       });
 
       const data = response.data;
       if (response.status === 200) {
         // Route based on user type
-        switch (data.userType) {
+        switch (data) {
           case 'admin':
-            navigate('/admin-dashboard');
+            navigate('/admin');
+            console.log("Login successful", data);
             break;
           case 'user':
-            navigate('/user-dashboard');
+            navigate('/user');
+            console.log("Login successful", data);
             break;
           case 'vendor':
-            navigate('/vendor-dashboard');
+            navigate('/vendor');
+            console.log("Login successful", data);
             break;
           case 'delivery':
             navigate('/delivery-dashboard');
+            console.log("Login successful", data);
             break;
           default:
-            navigate('/default-dashboard');
+            navigate('/');
+            console.log("Login successful", data);
+           
         }
-        console.log("Login successful", data);
+        
       } else {
         console.log('Login failed', data);
       }
@@ -58,8 +64,8 @@ const LoginPage = () => {
         variant="outlined"
         margin="normal"
         type='email'
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        value={useremail}
+        onChange={(e) => setUserEmail(e.target.value)}
       />
 
       <TextField
@@ -68,8 +74,8 @@ const LoginPage = () => {
         type="password"
         variant="outlined"
         margin="normal"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        value={userpassword}
+        onChange={(e) => setUserPassword(e.target.value)}
       />
 
       <Button
