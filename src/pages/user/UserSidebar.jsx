@@ -1,22 +1,21 @@
-import { Box } from '@mui/material'
-import React from 'react'
-import styled from 'styled-components';
+import React from 'react';
+import { Box, } from '@mui/material';
+import { AutoStories, EventNote, Person, ShoppingCart } from '@mui/icons-material';
+import Sidebar from '../../components/Sidebar';
 
-const SideBar = styled("Box")(({ theme }) => ({
-    display: "flex",
-    width: "20vw",
-    height: "83vh",
-    marginTop: "50px",
-    borderRadius: "8px",
-    backgroundColor: 'white',
-  }));
-  
+
+const userMenuItems = [
+  { text: "Category", icon: <EventNote />, path: "/user/category" },
+  { text: "Order", icon: <AutoStories />, path: "/user/order" },
+  { text: "Cart", icon: <ShoppingCart />, path: "/user/cart" },
+  { text: "Profile", icon: <Person />, path: "/user/profile" },
+];
 const UserSidebar = () => {
   return (
-   <Box>
-    <SideBar/>
-   </Box>
-  )
-}
+    <Box sx={{ padding: '20px' }}>
+      <Sidebar menuItems={userMenuItems} />
+    </Box>
+  );
+};
 
-export default UserSidebar
+export default UserSidebar;

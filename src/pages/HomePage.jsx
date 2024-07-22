@@ -1,8 +1,9 @@
 import React from 'react'
 import Navbar from '../components/Navbar';
-import styled from 'styled-components';
 import { Box, Grid, Paper, Typography } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
+import ProductCard from '../components/ProductCard';
+import { Link } from 'react-router-dom';
 
 // const Header = styled('Typography')(({ theme }) => ({
 //     fontfamily: 'Arial',
@@ -10,14 +11,14 @@ import Carousel from 'react-material-ui-carousel';
 //     fontSize: '7vh',
 // }))
 
-const ContainerBox = styled('Box')(({ theme }) => ({
-    width: '35vh',
-    height: '45vh',
-    boxShadow: '-moz-initial',
-    backgroundColor: 'white',
-    borderRadius: "5%",
-    textAlign: 'center',
-}))
+// const ContainerCard = styled('Card')(({ theme }) => ({
+//     width: '35vh',
+//     height: '45vh',
+//     boxShadow: '-moz-initial',
+//     backgroundColor: 'white',
+//     borderRadius: "5%",
+//     textAlign: 'center',
+// }))
 
 const images = [
     "https://www.blinkco.io/wp-content/uploads/2022/01/shopping-cart-full-of-food-on-yellow-background-g-2021-09-02-09-26-59-utc-1.jpg",
@@ -32,7 +33,7 @@ const HomePage = () => {
     return (
         <Box>
             <Navbar />
-            <Typography sx={{
+            <Typography component={Link} to="/" sx={{
                 fontFamily: 'Arial',
                 fontWeight: 'bolder',
                 fontSize: '7vh',
@@ -41,8 +42,7 @@ const HomePage = () => {
             }}>
                 Welcome to GroveGo!
             </Typography>
-
-            <Box sx={{ width: '85%', margin: '0 auto',overflow:'hidden' }}>
+            <Box sx={{ width: '85%',margin:'auto',height:'55vh',overflow:'hidden' }}>
                 <Carousel>
                     {images.map((image, i) => (
                         <Paper key={i} elevation={20} sx={{ boxShadow: 'none' }}>
@@ -50,8 +50,9 @@ const HomePage = () => {
                                 component="img"
                                 sx={{
                                     width: '100%',
-                                    height:'55vh',
-                                    objectFit: 'cover'
+                                    maxheight:'55vh',
+                                    objectFit: 'cover',
+                                    display:'block'
                                 }}
                                 src={image}
                                 alt={`Slide ${i}`}
@@ -60,29 +61,43 @@ const HomePage = () => {
                     ))}
                 </Carousel>
             </Box>
-            <Grid container spacing={2} columnGap={5} >
+            <Grid container spacing={2} columnGap={3} rowGap={8} >
 
-                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '10%' }}>
-                    <ContainerBox >Fruit vegetables</ContainerBox>
-                    <ContainerBox>Fruit vegetables</ContainerBox>
-                    <ContainerBox>Fruit vegetables</ContainerBox>
+                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>   
                 </Box>
-
-                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '15%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '10%' }}>
-                    <ContainerBox >Fruit vegetables</ContainerBox>
-                    <ContainerBox>Fruit vegetables</ContainerBox>
-                    <ContainerBox>Fruit vegetables</ContainerBox>
+                
+                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>   
                 </Box>
-                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '15%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '10%' }}>
-                    <ContainerBox >Fruit vegetables</ContainerBox>
-                    <ContainerBox>Fruit vegetables</ContainerBox>
-                    <ContainerBox>Fruit vegetables</ContainerBox>
+                
+                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>   
                 </Box>
-                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '15%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '10%' }}>
-                    <ContainerBox >Fruit vegetables</ContainerBox>
-                    <ContainerBox>Fruit vegetables</ContainerBox>
-                    <ContainerBox>Fruit vegetables</ContainerBox>
+                
+                {/* <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>   
                 </Box>
+                
+                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>
+                    <ProductCard/>   
+                </Box> */}
+                
             </Grid>
 
             {/* <Grid container spacing={4}

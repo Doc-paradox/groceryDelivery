@@ -1,23 +1,18 @@
-import { alpha, AppBar, InputBase, styled, Toolbar, Typography } from '@mui/material'
-import SearchIcon from '@mui/icons-material/Search'
-import React from 'react'
+import React from 'react';
+import { alpha, AppBar, InputBase, styled, Toolbar, Typography, Box } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 import { useNavigate } from 'react-router-dom';
 
-
-const Search = styled('Textfield')(({ theme }) => ({
+const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     backgroundColor: alpha(theme.palette.common.white, 0.25),
     '&:hover': {
         backgroundColor: alpha(theme.palette.common.white, 0.35),
     },
-    marginRight: "55%",
-    width: "300px",
-    height: "5vh",
-    [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
-        width: '300px',
-    }
+    width: '300px',
+    height: '5vh',
+    marginRight: theme.spacing(100),
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -30,67 +25,45 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     justifyContent: 'center',
 }));
 
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
     color: 'inherit',
     width: '100%',
     '& .MuiInputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
-        // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-        width: "100%",
-        [theme.breakpoints.up('sm')]: {
-            width: '12ch',
-            '&:focus': {
-                width: '20ch',
-            },
-        },
+        width: '100%',
     },
 }));
 
-const YellowButton = styled('button')(({ theme }) => ({
-    backgroundColor: theme.palette.secondary.light,
-    borderRadius: "10px",
-    height: "4vh",
-    width: "10vh",
-    cursor: "pointer",
-    '&:hover': {
-        cursor: "pointer"
-    }
+const NavButton = styled('button')(({ theme, color }) => ({
+    backgroundColor: color === 'yellow' ? theme.palette.secondary.light : 'transparent',
+    color: color === 'yellow' ? theme.palette.secondary.contrastText : theme.palette.primary.contrastText,
+    border: color === 'yellow' ? 'none' : `1px solid ${theme.palette.primary.contrastText}`,
+    borderRadius: '10px',
+    height: '4vh',
+    padding: '0 16px',
+    cursor: 'pointer',
+    marginLeft: theme.spacing(2),
 }));
-
-const WhiteButton = styled('button')(({ theme }) => ({
-    // backgroundColor:theme.palette.default,
-    variants: "outlined",
-    borderRadius: "10px",
-    height: "4vh",
-    width: "10vh",
-    cursor: "pointer",
-    '&:hover': {
-        cursor: "pointer"
-    }
-}));
-
-
 
 const Navbar = () => {
-
     const navigate = useNavigate();
 
-    const handleSignup= () => {
-        navigate("/signup")
-    }
-    const handleLogin= () => {
-        navigate("/login")
-    }
+    const handleSignup = () => {
+        navigate("/signup");
+    };
+
+    const handleLogin = () => {
+        navigate("/login");
+    };
 
     return (
         <AppBar position="sticky">
-                <Toolbar>
-                    <Typography variant="h6" noWrap component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, marginLeft: "5%" }}>
-                        GroveGo
-                    </Typography>
+            <Toolbar sx={{ justifyContent: 'space-between' }}>
+                <Typography variant="h6" noWrap component="div">
+                    GroveGo
+                </Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
@@ -100,18 +73,19 @@ const Navbar = () => {
                             inputProps={{ 'aria-label': 'search' }}
                         />
                     </Search>
-                    <Typography>
+                    <Typography sx={{ marginRight: 2 }}>
                         Category
                     </Typography>
-                    <YellowButton onClick={handleSignup}>
+                    <NavButton color="yellow" onClick={handleSignup}>
                         Sign up
-                    </YellowButton>
-                    <WhiteButton variant="outlined" onClick={handleLogin}>
+                    </NavButton>
+                    <NavButton onClick={handleLogin}>
                         Log in
-                    </WhiteButton>
-                </Toolbar>
+                    </NavButton>
+                </Box>
+            </Toolbar>
         </AppBar>
-    )
-}
+    );
+};
 
 export default Navbar;
