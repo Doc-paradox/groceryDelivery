@@ -2,12 +2,15 @@ import React from "react";
 import { CssBaseline, ThemeProvider } from '@mui/material';
 import './App.css';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import axios from "axios";
 import theme from './theme';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from "./pages/SignupPage";
 import { UserDashboard } from "./pages/user/UserDashboard";
 import VendorDashboard from "./pages/vendor/VendorDashboard";
+
+axios.defaults.baseURL = 'http://localhost:8080';
 
 const App =() =>(
   <ThemeProvider theme={theme}>

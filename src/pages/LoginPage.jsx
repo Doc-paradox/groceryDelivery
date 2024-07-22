@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -13,18 +14,15 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POSt',
-        headers: {
-          'Constent-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
+      const response = await axios.post('/USERS/login', {
+        USEREMAIL: email,
+        USERPASSWORD: password,
       });
 
-      const data = await response.json();
-      if (response.ok) {
-        //Route based on user type
-        switch(data.userType) {
+      const data = response.data;
+      if (response.status === 200) {
+        // Route based on user type
+        switch (data.userType) {
           case 'admin':
             navigate('/admin-dashboard');
             break;
@@ -49,7 +47,7 @@ const LoginPage = () => {
     }
   }
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, margin: 'auto', padding: 5 ,marginTop:'15%',borderColor:'black',border:'1px solid',borderRadius:'10%'}}>
+    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, margin: 'auto', padding: 5, marginTop: '15%', borderColor: 'black', border: '1px solid', borderRadius: '10%' }}>
       <Typography variant="h5" component="h1" gutterBottom>
         Login
       </Typography>
@@ -74,19 +72,19 @@ const LoginPage = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <Button 
-        variant="contained" 
-        color="primary" 
-        fullWidth 
-        sx={{ mt: 2}}
+      <Button
+        variant="contained"
+        color="primary"
+        fullWidth
+        sx={{ mt: 2 }}
         onClick={handleSubmit}
-        
+
       >
-        Login 
+        Login
       </Button>
 
 
-      <small >Need an account? <Link to ="/signup">Sign up</Link></small>
+      <small >Need an account? <Link to="/signup">Sign up</Link></small>
 
     </Box>
   )

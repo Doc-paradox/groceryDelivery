@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 
@@ -14,24 +15,23 @@ const SignupPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ userType, email, password }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        // Redirect to login page or dashboard after successful signup
-        navigate('/login');
-      } else {
-        console.error('Signup failed', data);
-      }
+        const response = await axios.post('/USERS/addUser', {
+            USERROLE: userType,
+            USEREMAIL: email,
+            USERPASSWORD: password,
+        });
+
+        const data = response.data;
+        if (response.status === 200) {
+            // Redirect to login page or dashboard after successful signup
+            navigate('/login');
+        } else {
+            console.error('Signup failed', data);
+        }
     } catch (error) {
-      console.error('Error during signup', error);
+        console.error('Error during signup', error);
     }
-  };
+};
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 500, margin: 'auto', padding: 5,marginTop:'13%',borderColor:'black',border:'1px solid',borderRadius:'10%' }}>

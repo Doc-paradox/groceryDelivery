@@ -12,7 +12,7 @@ const myTheme = createTheme({
             light: "#F0BE49"
         },
         background:{
-            default: "#F8EDD9"
+            default: "#FFEBAE"
         }
     }
 })
