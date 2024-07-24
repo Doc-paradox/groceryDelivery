@@ -5,6 +5,7 @@ import Carousel from 'react-material-ui-carousel';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 
+
 // const Header = styled('Typography')(({ theme }) => ({
 //     fontfamily: 'Arial',
 //     fontWeight: 'bolder',
@@ -30,6 +31,8 @@ const images = [
 
 
 const HomePage = () => {
+    
+
     return (
         <Box>
             <Navbar />
@@ -38,7 +41,7 @@ const HomePage = () => {
                 fontWeight: 'bolder',
                 fontSize: '7vh',
                 textAlign: 'center',
-                margin: '20px 0'
+                marginLeft:'35%'
             }}>
                 Welcome to GroveGo!
             </Typography>

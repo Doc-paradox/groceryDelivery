@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import { styled } from '@mui/system';
+import axios from 'axios';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 280,
@@ -35,7 +36,7 @@ const CategoryDescription = styled(Typography)(({ theme }) => ({
   fontSize: '0.9rem',
 }));
 
-const CategoryCard = ({ title, image, description }) => {
+const ProductCard = ({ title, image, description }) => {
   return (
     <StyledCard>
       <CategoryImage
@@ -55,4 +56,39 @@ const CategoryCard = ({ title, image, description }) => {
   );
 };
 
-export default CategoryCard;
+export default ProductCard;
+
+// const ProductCard = ({endpoint}) =>{
+//   const[categories,setCategories] = useState([]);
+
+//     useEffect(() =>{
+//         const fetchCategories = async () =>{
+//             try{
+//                 const response = await axios.get(endpoint);
+//                 setCategories(response.data);
+//             }catch(error){
+//                 console.error("error fetching categories :", error);
+//             }
+//         };
+//         fetchCategories();
+//     },[]);
+//   return(
+//     <StyledCard>
+//       <CategoryImage
+//         component="img"
+//         image={"https://imgs.search.brave.com/0zXDrdUAQKYIdY9y386CGTi2oq9bbKq3b-nPCL1U43E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAxNi8w/NC8xMy8wNy8xOC9i/bHVlYmVycmllcy0x/MzI2MTU0XzY0MC5q/cGc"}
+//         alt={title}
+//       />
+//       <CategoryContent>
+//         <CategoryTitle variant='h6' component='h3'>
+//           {title}
+//         </CategoryTitle>
+//         <CategoryDescription variant='body2'>
+//           {title}
+//         </CategoryDescription>
+//       </CategoryContent>
+//     </StyledCard>
+//   )
+// };
+
+// export default ProductCard;

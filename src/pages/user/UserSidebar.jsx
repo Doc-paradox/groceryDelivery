@@ -12,7 +12,7 @@ const userMenuItems = [
 ];
 const UserSidebar = () => {
   return (
-    <Box sx={{ padding: '20px' }}>
+    <Box >
       <Sidebar menuItems={userMenuItems} />
     </Box>
   );

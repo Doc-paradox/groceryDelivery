@@ -9,8 +9,11 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from "./pages/SignupPage";
 import  UserDashboard  from "./pages/user/UserDashboard";
 import VendorDashboard from "./pages/vendor/VendorDashboard";
+import AddProduct from "./pages/vendor/AddProduct";
 
 axios.defaults.baseURL = 'http://localhost:8080';
+
+
 
 const App =() =>(
   <ThemeProvider theme={theme}>
@@ -22,6 +25,7 @@ const App =() =>(
         <Route path="/login" element={<LoginPage/>} />   
         <Route path="/user" element={<UserDashboard/>}/>
         <Route path="/vendor" element={<VendorDashboard/>}/>
+        <Route path="/vendor/product" element={<AddProduct/>}/>
       </Routes>
     </Router>
   </ThemeProvider>
