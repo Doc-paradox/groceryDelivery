@@ -7,8 +7,8 @@ import theme from './theme';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from "./pages/SignupPage";
-import  UserDashboard  from "./pages/user/UserDashboard";
-import VendorDashboard from "./pages/vendor/VendorDashboard";
+import  UserDashboard  from "./pages/user/userDashboard";
+import VendorDashboard from "./pages/vendor/vendorDashboard";
 import AddProduct from "./pages/vendor/AddProduct";
 
 axios.defaults.baseURL = 'http://localhost:8080';

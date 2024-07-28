@@ -1,9 +1,10 @@
 import React from 'react'
 import Navbar from '../components/Navbar';
-import { Box, Grid, Paper, Typography } from '@mui/material';
+import { AppBar, Box, Grid, Paper, Typography } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
+import BannerCard from '../components/BannerCard';
 
 
 // const Header = styled('Typography')(({ theme }) => ({
@@ -36,16 +37,26 @@ const HomePage = () => {
     return (
         <Box>
             <Navbar />
-            <Typography component={Link} to="/" sx={{
-                fontFamily: 'Arial',
+            {/* <Typography  sx={{
+                fontFamily: '"Quicksand", sans-serif',
                 fontWeight: 'bolder',
                 fontSize: '7vh',
                 textAlign: 'center',
-                marginLeft:'35%'
+                marginLeft:'35%',
+                textDecoration:'none'
             }}>
                 Welcome to GroveGo!
-            </Typography>
-            <Box sx={{ width: '85%',margin:'auto',height:'55vh',overflow:'hidden' }}>
+            </Typography> */}
+            <Grid sx={{
+                backgroundColor:"red",
+                // '#eff5ee',
+                height:'10vh',
+                width:'100%'
+                
+            }}>
+        
+            </Grid>
+            {/* <Box sx={{ width: '85%',margin:'auto',height:'55vh',overflow:'hidden' }}>
                 <Carousel>
                     {images.map((image, i) => (
                         <Paper key={i} elevation={20} sx={{ boxShadow: 'none' }}>
@@ -63,7 +74,8 @@ const HomePage = () => {
                         </Paper>
                     ))}
                 </Carousel>
-            </Box>
+            </Box> */}
+            <BannerCard/>
             <Grid container spacing={2} columnGap={3} rowGap={8} >
 
                 <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>

@@ -12,7 +12,8 @@ const theme = createTheme({
             light: "#F0BE49"
         },
         background:{
-            default: "#FFEBAE"
+            // default: "#FFF9E9"
+            default:"#eff5ee"
         }
     },
 })

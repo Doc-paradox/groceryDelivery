@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Box, Button } from '@mui/material';
 import { styled } from '@mui/system';
 import axios from 'axios';
 
@@ -14,7 +14,13 @@ const StyledCard = styled(Card)(({ theme }) => ({
     boxShadow: theme.shadows[8],
   },
 }));
-
+ const AddToCart = styled(Button)(({theme}) =>({
+  backgroundColor:theme.palette.secondary.main,
+  color:'white',
+  '&:hover':{
+    backgroundColor:theme.palette.secondary.dark,
+  }
+ }))
 const CategoryImage = styled(CardMedia)(({ theme }) => ({
   height: 180,
   objectFit: 'cover',
@@ -33,6 +39,8 @@ const CategoryTitle = styled(Typography)(({ theme }) => ({
 
 const CategoryDescription = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
+  textAlign: 'center',
+  marginBottom: theme.spacing(2),
   fontSize: '0.9rem',
 }));
 
@@ -48,9 +56,10 @@ const ProductCard = ({ title, image, description }) => {
         <CategoryTitle variant="h6" component="h3">
           Fruit
         </CategoryTitle>
-        <CategoryDescription variant="body2">
-          Best seasonal fruit
+        <CategoryDescription variant="body2" gutterBottom >
+          Best seasonal fruit guydeglgdbeiudwufgfcibcocoewufnyeftefgbweiycfvyegvuwdtvTEYGIYFTTUDUT
         </CategoryDescription>
+       <AddToCart>Add Cart</AddToCart>
       </CategoryContent>
     </StyledCard>
   );

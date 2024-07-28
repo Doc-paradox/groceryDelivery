@@ -1,7 +1,7 @@
 import React from 'react';
 import { alpha, AppBar, InputBase, styled, Toolbar, Typography, Box } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -60,7 +60,7 @@ const Navbar = () => {
     return (
         <AppBar position="sticky">
             <Toolbar sx={{ justifyContent: 'space-between' }}>
-                <Typography variant="h6" noWrap component="div">
+                <Typography variant="h6" noWrap component="div" >
                     GroveGo
                 </Typography>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
