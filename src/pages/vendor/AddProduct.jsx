@@ -1,74 +1,117 @@
-// import React from 'react'
+// import React, { useEffect, useState } from 'react'
 // import Navbar from '../../components/Navbar'
+// import axios from 'axios';
 
 // const AddProduct = () => {
+//   const [products,setProduct] = useState([]);
+
+//   useEffect(() =>{
+//         axios.get('/getAllproduct')
+//         .then(response => {
+//           console.log(response.data);
+//           setProduct(response.data);
+//         })
+//         .catch(error =>{
+//           console.error("There was an error fetching the products!", error);
+//         });
+//       },[]);
 //   return (
 //    <>
-//     <Navbar/>
+//     <ul>
+//         {products.map(product => (
+//             <li key={product.id}>
+//                 <h2>{product.productname}</h2>
+//                 <p>Price: ${product.price}</p>
+//             </li>
+//         ))}
+//     </ul>
 //    </>
 //   )
 // }
 
 // export default AddProduct
+
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const AddProduct = () => {
-  const { productId } = useParams(); // Assumes productId is passed as a route parameter
-  const [productName, setProductName] = useState('');
-  const [productDescription, setProductDescription] = useState('');
+  const { productid } = useParams(); // Assumes productId is passed as a route parameter
+  const [productname, setProductname] = useState('');
+  const [productdescription, setProductdescription] = useState('');
+  const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
   const [stock, setStock] = useState('');
-  const [manufactureDate, setManufactureDate] = useState('');
-  const [expiryDate, setExpiryDate] = useState('');
+  const [manufactutredate, setManufactutredate] = useState('');
+  const [expirydate, setExpirydate] = useState('');
+  const [vendorid, setVendorid] = useState(localStorage.getItem('userid')); 
+
+  // const [products, setProducts] = useState([]);
+
+  // useEffect(() =>{
+  //   axios.get('/getAllProduct')
+  //   .then(response => {
+  //     setProducts(response.data);
+  //   })
+  //   .catch(error =>{
+  //     console.error("There was an error fetching the products!", error);
+  //   });
+  // },[]);
 
   useEffect(() => {
-    if (productId) {
+    if (productid) {
       // Fetch product details if productId is provided
-      axios.get(`/getProduct/${productId}`)
+      axios.get(`/getAllproduct/${productid}`)
         .then(response => {
           const product = response.data;
-          setProductName(product.PRODUCTNAME);
-          setProductDescription(product.PRODUCTDESCRIPTION);
-          setPrice(product.PRICE);
-          setStock(product.STOCK);
-          setManufactureDate(product.M_DATE);
-          setExpiryDate(product.EXP_DATE);
+          setProductname(product.productname);
+          setProductdescription(product.productdescription);
+          setCategory(product.category);
+          setPrice(product.price);
+          setStock(product.stock);
+          setManufactutredate(product.manufactutredate);
+          setExpirydate(product.expirydate);
+          setVendorid(product.vendorid);
         })
+       
         .catch(error => {
           console.error('There was an error fetching the product details!', error);
         });
     }
-  }, [productId]);
+  }, [productid]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const productData = {
-      PRODUCTNAME: productName,
-      PRODUCTDESCRIPTION: productDescription,
-      PRICE: parseFloat(price),
-      STOCK: parseInt(stock),
-      M_DATE: manufactureDate,
-      EXP_DATE: expiryDate
+      productname: productname,
+      productdescription: productdescription,
+      category: category,
+      price: parseFloat(price),
+      stock: parseInt(stock),
+      manufactutredate: manufactutredate,
+      expirydate: expirydate,
+      vendorid: parseInt(vendorid)
     };
 
+
     try {
-      if (productId) {
-        await axios.put(`/updateProductDescPrice/${productId}`, productData);
+      
+      if (productid) {
+        await axios.put(`/updateProductDescPrice/${productid}`,productData);
         alert('Product updated successfully!');
       } else {
         await axios.post('/addProduct', productData);
         alert('Product added successfully!');
       }
       // Clear the form
-      setProductName('');
-      setProductDescription('');
+      setProductname('');
+      setProductdescription('');
+      setCategory('');
       setPrice('');
       setStock('');
-      setManufactureDate('');
-      setExpiryDate('');
+      setManufactutredate('');
+      setExpirydate('');
     } catch (error) {
       console.error('There was an error adding/updating the product!', error);
     }
@@ -77,23 +120,39 @@ const AddProduct = () => {
   return (
     <Container maxWidth="sm">
       <Box sx={{ mt: 4 }}>
-        <Typography variant="h4" gutterBottom>{productId ? 'Update Product' : 'Add New Product'}</Typography>
+        <Typography variant="h4" gutterBottom>{productid ? 'Update Product' : 'Add New Product'}</Typography>
+        {/* <ul>
+                {products.map(product => (
+                    <li key={product.id}>
+                        <h2>{product.name}</h2>
+                        <p>Price: ${product.price}</p>
+                    </li>
+                ))}
+            </ul> */}
         <form onSubmit={handleSubmit}>
           <TextField
             label="Product Name"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
+            value={productname}
+            onChange={(e) => setProductname(e.target.value)}
           />
           <TextField
             label="Product Description"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={productDescription}
-            onChange={(e) => setProductDescription(e.target.value)}
+            value={productdescription}
+            onChange={(e) => setProductdescription(e.target.value)}
+          />
+          <TextField
+            label="Category"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
           />
           <TextField
             label="Price"
@@ -119,8 +178,8 @@ const AddProduct = () => {
             fullWidth
             margin="normal"
             type="date"
-            value={manufactureDate}
-            onChange={(e) => setManufactureDate(e.target.value)}
+            value={manufactutredate}
+            onChange={(e) => setManufactutredate(e.target.value)}
             InputLabelProps={{
               shrink: true,
             }}
@@ -131,14 +190,14 @@ const AddProduct = () => {
             fullWidth
             margin="normal"
             type="date"
-            value={expiryDate}
-            onChange={(e) => setExpiryDate(e.target.value)}
+            value={expirydate}
+            onChange={(e) => setExpirydate(e.target.value)}
             InputLabelProps={{
               shrink: true,
             }}
           />
           <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-            {productId ? 'Update Product' : 'Add Product'}
+            {productid ? 'Update Product' : 'Add Product'}
           </Button>
         </form>
       </Box>

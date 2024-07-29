@@ -5,6 +5,7 @@ import Carousel from 'react-material-ui-carousel';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 import BannerCard from '../components/BannerCard';
+import ViewProducts from './user/ViewProducts';
 
 
 // const Header = styled('Typography')(({ theme }) => ({
@@ -79,10 +80,11 @@ const HomePage = () => {
             <Grid container spacing={2} columnGap={3} rowGap={8} >
 
                 <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
+                    {/* <ProductCard/>
                     <ProductCard/>
                     <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>   
+                    <ProductCard/>    */}
+                    <ViewProducts/>
                 </Box>
                 
                 <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>

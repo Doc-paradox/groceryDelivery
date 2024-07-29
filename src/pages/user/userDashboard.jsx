@@ -72,6 +72,7 @@ import Navbar from '../../components/Navbar';
 import UserSidebar from './UserSidebar';
 import ProductCarousel from '../../components/ProductCarousel';
 import styled from 'styled-components';
+import ViewProducts from './ViewProducts';
 
 const ProductItem = styled(Paper)({
   padding: '20px',
@@ -108,11 +109,12 @@ const UserDashboard = () => {
             <Grid container spacing={3} sx={{ marginTop: '20px' }}>
               {[1, 2, 3, 4, 5, 6].map((item) => (
                 <Grid item xs={4} key={item}>
-                  <ProductItem>
+                  {/* <ProductItem>
                     <Typography variant="h6">Product {item}</Typography>
                     <Typography>Description of Product {item}</Typography>
                     <Typography variant="subtitle1">$19.99</Typography>
-                  </ProductItem>
+                  </ProductItem> */}
+                  <ViewProducts/>
                 </Grid>
               ))}
             </Grid>

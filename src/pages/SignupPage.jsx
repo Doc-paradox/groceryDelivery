@@ -24,8 +24,13 @@ const SignupPage = () => {
         const data = response.data;
         if (response.status === 200) {
             // Redirect to login page or dashboard after successful signup
+            if (userrole === 'vendor') {
+              navigate('/login');
+              // navigate('/address');
+          }else{
             navigate('/login');
             alert("Sign up successful")
+          }
         } else {
             console.error('Signup failed', data);
         }

@@ -19,7 +19,12 @@ const LoginPage = () => {
         userpassword: userpassword,
       });
 
-      const data = response.data;
+      const { userid, userrole } = response.data;
+      localStorage.setItem('userid', parseInt(userid)); // Store userid in local storage
+      // alert(`Logged in as ${userrole}`);
+      console.log(`Login successful, ${userrole},${userid}`);
+      console.log(userrole);
+      const data = userrole;
       if (response.status === 200) {
         // Route based on user type
         switch (data) {
@@ -88,7 +93,6 @@ const LoginPage = () => {
       >
         Login
       </Button>
-
 
       <small >Need an account? <Link to="/signup">Sign up</Link></small>
 
