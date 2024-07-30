@@ -7,11 +7,11 @@ import styled from 'styled-components';
 const SideBar = styled("Box")(({ theme }) => ({
   display: "flex",
   width: "100%",
-  height: "70vw", 
+  height: "70vw",
   borderRadius: "none",
   // alignItems: "center",
   // justifyContent: "center",
-  backgroundColor:'lightblue',
+  backgroundColor: 'lightblue',
 }));
 
 const Sidebar = ({ menuItems }) => {

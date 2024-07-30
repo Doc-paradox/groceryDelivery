@@ -1,11 +1,16 @@
 import React from 'react'
 import Navbar from '../components/Navbar';
-import { AppBar, Box, Grid, Paper, Typography } from '@mui/material';
+import { alpha, AppBar, Box, Button, Grid, InputBase, Paper, styled, Typography } from '@mui/material';
 import Carousel from 'react-material-ui-carousel';
 import ProductCard from '../components/ProductCard';
 import { Link } from 'react-router-dom';
 import BannerCard from '../components/BannerCard';
 import ViewProducts from './user/ViewProducts';
+import { AccountCircleOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
+import DisplayCard from '../components/DisplayCard';
+
+
+
 
 
 // const Header = styled('Typography')(({ theme }) => ({
@@ -23,6 +28,13 @@ import ViewProducts from './user/ViewProducts';
 //     textAlign: 'center',
 // }))
 
+const StyledBox = styled(Box)(({ theme }) => ({
+    backgroundColor: theme.palette.primary.main,
+    height: '80vw',
+    width: '100%',
+    borderRadius: '10px',
+}))
+
 const images = [
     "https://www.blinkco.io/wp-content/uploads/2022/01/shopping-cart-full-of-food-on-yellow-background-g-2021-09-02-09-26-59-utc-1.jpg",
     "https://149449856.v2.pressablecdn.com/wp-content/uploads/2020/07/Vegetables-in-Bag.jpg",
@@ -33,7 +45,6 @@ const images = [
 
 
 const HomePage = () => {
-    
 
     return (
         <Box>
@@ -48,14 +59,22 @@ const HomePage = () => {
             }}>
                 Welcome to GroveGo!
             </Typography> */}
-            <Grid sx={{
-                backgroundColor:"red",
-                // '#eff5ee',
-                height:'10vh',
-                width:'100%'
-                
+            <Grid container direction={'row'} gap={22} padding="10px" justifyContent="space-between" alignItems="center" sx={{
+                backgroundColor: "#eff5ee",
+                height: '12vh',
+                width: '100%'
+
             }}>
-        
+                <Typography>GrooveGo</Typography>
+                <Box>
+                    <Button>Category</Button>
+                    searchfield will come here
+                </Box>
+                <Box direction="column" gap="25px">
+                    <SearchOutlined />
+                    <AccountCircleOutlined />
+                    <ShoppingCartOutlined />
+                </Box>
             </Grid>
             {/* <Box sx={{ width: '85%',margin:'auto',height:'55vh',overflow:'hidden' }}>
                 <Carousel>
@@ -76,32 +95,33 @@ const HomePage = () => {
                     ))}
                 </Carousel>
             </Box> */}
-            <BannerCard/>
-            <Grid container spacing={2} columnGap={3} rowGap={8} >
+            <BannerCard />
+            <Grid padding='35px'>
 
-                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
-                    {/* <ProductCard/>
+                <DisplayCard />
+                <StyledBox>
+                    Heyy
+                </StyledBox>
+                <Grid>
+                    <Box>
+                        Book Your Delivery To Your Convience
+                        From 06:00 AM To 10:00 PM
+                    </Box>
+                </Grid>
+
+                <Grid container spacing={2} columnGap={3} rowGap={8} >
+
+                    <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
+                        {/* <ProductCard/>
                     <ProductCard/>
                     <ProductCard/>
                     <ProductCard/>    */}
-                    <ViewProducts/>
-                </Box>
-                
-                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>   
-                </Box>
-                
-                <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>
-                    <ProductCard/>   
-                </Box>
-                
-                {/* <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
+                        <ViewProducts />
+                        <ViewProducts />
+
+                    </Box>
+
+                    {/* <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
                     <ProductCard/>
                     <ProductCard/>
                     <ProductCard/>
@@ -114,10 +134,10 @@ const HomePage = () => {
                     <ProductCard/>
                     <ProductCard/>   
                 </Box> */}
-                
-            </Grid>
 
-            {/* <Grid container spacing={4}
+                </Grid>
+
+                {/* <Grid container spacing={4}
                 sx={{
                     width: '80%',
                     height: '25vh',
@@ -139,8 +159,9 @@ const HomePage = () => {
                     </Grid>
                 ))}
             </Grid> */}
-            
 
+
+            </Grid>
         </Box>
 
 

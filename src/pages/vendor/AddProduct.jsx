@@ -45,7 +45,7 @@ const AddProduct = () => {
   const [stock, setStock] = useState('');
   const [manufactutredate, setManufactutredate] = useState('');
   const [expirydate, setExpirydate] = useState('');
-  const [vendorid, setVendorid] = useState(localStorage.getItem('userid')); 
+  const [vendorid, setVendorid] = useState(localStorage.getItem('userid'));
 
   // const [products, setProducts] = useState([]);
 
@@ -74,7 +74,7 @@ const AddProduct = () => {
           setExpirydate(product.expirydate);
           setVendorid(product.vendorid);
         })
-       
+
         .catch(error => {
           console.error('There was an error fetching the product details!', error);
         });
@@ -96,9 +96,9 @@ const AddProduct = () => {
 
 
     try {
-      
+
       if (productid) {
-        await axios.put(`/updateProductDescPrice/${productid}`,productData);
+        await axios.put(`/updateProductDescPrice/${productid}`, productData);
         alert('Product updated successfully!');
       } else {
         await axios.post('/addProduct', productData);

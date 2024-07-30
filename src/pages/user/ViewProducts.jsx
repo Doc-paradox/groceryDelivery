@@ -5,35 +5,35 @@ import axios from 'axios';
 
 const ViewProducts = () => {
 
-    const [products,setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
 
-    useEffect(() =>{
-        const fecthProducts = async() => {
-            try{
-                const response = await axios.get('/getAllproduct');
-                setProducts(response.data);
-                // console.log(response.data)
-            }
-            catch(error){
-                console.error("There was an error fetching the products!", error);
-            }
-        };
-        fecthProducts();
-    },[]);
+  useEffect(() => {
+    const fecthProducts = async () => {
+      try {
+        const response = await axios.get('/getAllproduct');
+        setProducts(response.data);
+        // console.log(response.data)
+      }
+      catch (error) {
+        console.error("There was an error fetching the products!", error);
+      }
+    };
+    fecthProducts();
+  }, []);
   return (
     <Grid container spacing={3} justifyContent="center">
-    {products.map((product) => (
-      <Grid item key={product.productid}>
-        <ProductCard
-        productid={product.productid}
-          title={product.productname}
-          description={product.productdescription}
-          price={product.price}
-          stock = {product.stock}
-        />
-      </Grid>
-    ))}
-  </Grid>
+      {products.map((product) => (
+        <Grid item key={product.productid}>
+          <ProductCard
+            productid={product.productid}
+            title={product.productname}
+            description={product.productdescription}
+            price={product.price}
+            stock={product.stock}
+          />
+        </Grid>
+      ))}
+    </Grid>
   )
 }
 

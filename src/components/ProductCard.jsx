@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 280,
-  height:'45vh',
+  height: '50vh',
   margin: theme.spacing(2),
   borderRadius: '10px',
   transition: 'all 0.3s ease-in-out',
@@ -16,17 +16,17 @@ const StyledCard = styled(Card)(({ theme }) => ({
     boxShadow: theme.shadows[8],
   },
 }));
- const AddToCart = styled(Button)(({theme}) =>({
-  backgroundColor:theme.palette.secondary.main,
-  color:'white',
-  '&:hover':{
-    backgroundColor:theme.palette.secondary.dark,
+const AddToCart = styled(Button)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  color: 'white',
+  '&:hover': {
+    backgroundColor: theme.palette.secondary.dark,
   }
- }))
+}))
 const CategoryImage = styled(CardMedia)(({ theme }) => ({
   height: 180,
   objectFit: 'cover',
-  display:'block'
+  display: 'block'
 }));
 
 const CategoryContent = styled(CardContent)(({ theme }) => ({
@@ -46,32 +46,32 @@ const CategoryDescription = styled(Typography)(({ theme }) => ({
   fontSize: '0.9rem',
 }));
 
-const ProductCard = ({ productid,title, description,price,stock }) => {
+const ProductCard = ({ productid, title, description, price, stock }) => {
 
   const handleAddToCart = async () => {
     try {
-        const userid = localStorage.getItem('userid'); // Get the logged-in user's ID
-        // const productid = productid;
+      const userid = localStorage.getItem('userid'); // Get the logged-in user's ID
+      // const productid = productid;
 
-       const response= await axios.post(`/USERS/addToCart/${userid}`,null, {
-           params:{ 
-            // USERID: userid,
-            PRODUCTID: productid, // Replace with actual product ID
-            QUANTITY: 1, // Set quantity as needed
-           },
-        
-          });
-          console.log(response.data);
-        alert('Product added to cart');
+      const response = await axios.post(`/USERS/addToCart/${userid}`, null, {
+        params: {
+          // USERID: userid,
+          PRODUCTID: productid, // Replace with actual product ID
+          QUANTITY: 1, // Set quantity as needed
+        },
+
+      });
+      console.log(response.data);
+      alert('Product added to cart');
     } catch (error) {
-        console.error('Error adding product to cart', error);
+      console.error('Error adding product to cart', error);
     }
-};
+  };
 
   const imageUrl = imageMapping[title];
- 
+
   return (
-    
+
     <StyledCard>
       <CategoryImage
         component="img"
@@ -83,9 +83,11 @@ const ProductCard = ({ productid,title, description,price,stock }) => {
           {title}
         </CategoryTitle>
         <CategoryDescription variant="body2" gutterBottom >
-          {description},{price},{stock}
+          <Typography>{description}</Typography>
+          <Typography>Price:{price}</Typography>
+          <Typography>Available:{stock}</Typography>
         </CategoryDescription>
-       <AddToCart onClick={handleAddToCart}>Add Cart</AddToCart>
+        <AddToCart onClick={handleAddToCart}>Add Cart</AddToCart>
       </CategoryContent>
     </StyledCard>
   );

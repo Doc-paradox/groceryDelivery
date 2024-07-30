@@ -47,9 +47,9 @@ const LoginPage = () => {
           default:
             navigate('/');
             console.log("Login successful", data);
-           
+
         }
-        
+
       } else {
         console.log('Login failed', data);
       }
@@ -58,44 +58,56 @@ const LoginPage = () => {
     }
   }
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, margin: 'auto', padding: 5, marginTop: '15%', borderColor: 'black', border: '1px solid', borderRadius: '10%' }}>
-      <Typography variant="h5" component="h1" gutterBottom>
-        Login
-      </Typography>
+    <Box sx={{ justifyContent: 'center', alignItems: 'center', display: 'flex', height: '100vh' }}>
 
-      <TextField
-        fullWidth
-        label="Email"
-        variant="outlined"
-        margin="normal"
-        type='email'
-        value={useremail}
-        onChange={(e) => setUserEmail(e.target.value)}
-      />
+      <Box component="form" onSubmit={handleSubmit} sx={{
+        maxWidth: 400,
+        //  margin: 'auto', 
+        padding: 5,
+        //  marginTop: '15%', 
+        borderColor: 'black',
+        //  border: '1px solid', 
+        borderRadius: '5%',
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.4)'
+      }}>
+        <Typography variant="h5" component="h1" gutterBottom>
+          Login
+        </Typography>
 
-      <TextField
-        fullWidth
-        label="Password"
-        type="password"
-        variant="outlined"
-        margin="normal"
-        value={userpassword}
-        onChange={(e) => setUserPassword(e.target.value)}
-      />
+        <TextField
+          fullWidth
+          label="Email"
+          variant="outlined"
+          margin="normal"
+          type='email'
+          value={useremail}
+          onChange={(e) => setUserEmail(e.target.value)}
+        />
 
-      <Button
-        variant="contained"
-        color="primary"
-        fullWidth
-        sx={{ mt: 2 }}
-        onClick={handleSubmit}
+        <TextField
+          fullWidth
+          label="Password"
+          type="password"
+          variant="outlined"
+          margin="normal"
+          value={userpassword}
+          onChange={(e) => setUserPassword(e.target.value)}
+        />
 
-      >
-        Login
-      </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2, mb: 2 }}
+          onClick={handleSubmit}
 
-      <small >Need an account? <Link to="/signup">Sign up</Link></small>
+        >
+          Login
+        </Button>
 
+        <small >Need an account? <Link to="/signup">Sign up</Link></small>
+
+      </Box>
     </Box>
   )
 }

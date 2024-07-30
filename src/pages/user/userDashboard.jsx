@@ -93,30 +93,26 @@ const UserDashboard = () => {
           <UserSidebar />
         </Grid>
         <Grid item xs={9}>
-          <Box 
-          sx={{ padding: '20px' }}
+          <Box
+            sx={{ padding: '20px' }}
           >
             <Grid conatiner spacing={3} rowGap={8} columnGap={3} >
-            <Box sx={{backgroundColor:'white'}}>
-            <ProductCarousel />
-            </Box>
-            <Box sx={{backgroundColor:'green'}}>
-            <ProductCarousel />
-            </Box>
-            {/* <ProductCarousel />
-            <ProductCarousel /> */}
+              <Box sx={{ backgroundColor: 'white' }}>
+                <ProductCarousel />
+              </Box>
+              <Box sx={{ backgroundColor: 'green' }}>
+                <ProductCarousel />
+              </Box>
             </Grid>
-            <Grid container spacing={3} sx={{ marginTop: '20px' }}>
-              {[1, 2, 3, 4, 5, 6].map((item) => (
+            {/* <Grid container spacing={3} sx={{ marginTop: '20px' }}>
+              {[1, 2, 3, ].map((item) => (
                 <Grid item xs={4} key={item}>
-                  {/* <ProductItem>
-                    <Typography variant="h6">Product {item}</Typography>
-                    <Typography>Description of Product {item}</Typography>
-                    <Typography variant="subtitle1">$19.99</Typography>
-                  </ProductItem> */}
                   <ViewProducts/>
                 </Grid>
               ))}
+            </Grid> */}
+            <Grid container spacing={3} sx={{ marginTop: '20px' }}>
+              <ViewProducts />
             </Grid>
           </Box>
         </Grid>

@@ -10,11 +10,11 @@ const VendorDashboard = () => {
   return (
     <Box>
       <Navbar />
-      <Box position="fixed" sx={{ backgroundColor: '#eff5ee', height: '70vw', width: '5vw', boxShadow:'10px'}}>
+      <Box position="fixed" sx={{ backgroundColor: '#eff5ee', height: '70vw', width: '5vw', boxShadow: '10px' }}>
         <VendorSidebar />
       </Box>
       <Grid display={'flex'} flexDirection={'column'} >
-        <Box sx={{ marginLeft: '25%'}}>
+        <Box sx={{ marginLeft: '25%' }}>
           <ProductCard />
           <AddProduct />
         </Box>

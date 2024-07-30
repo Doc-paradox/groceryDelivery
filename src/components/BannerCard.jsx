@@ -1,9 +1,22 @@
 import { ShoppingCartOutlined } from '@mui/icons-material'
-import { Box, Button, Card, Fab, Grid, Typography } from '@mui/material'
+import { Box, Button, Card, Fab, Grid, styled, Typography } from '@mui/material'
 import React from 'react'
-import styled from 'styled-components'
 
+const Header = styled('Typopgraphy')(({ theme }) => ({
 
+  fontFamily: theme.typography.fontFamily,
+  fontSize: theme.typography.h1.fontSize,
+  fontWeight: theme.typography.h1.fontWeight,
+  color: "#EBFFDC",
+
+}))
+
+const SubTitle = styled('Typography')(({ theme }) => ({
+
+  fontSize: theme.typography.body1.fontSize,
+  fontWeight: 'bold',
+  color: "#EBFFDC",
+}))
 
 const BannerCard = () => {
   return (
@@ -17,24 +30,19 @@ const BannerCard = () => {
           backgroundSize: "contain",
           backgroundColor: "#253f26"
         }}>
-        <Grid container item direction={'column'} xs={6} alignItems="start" justifyContent={"space-evenly"}
-          // backgroundColor="#006614"
-          height={'40vh'}
-          ml="45%"
-          gap={2}
-          sx={{
-            color: " #EBFFDC",
-            fontSize: "26vw",
-            fontWeight: "bold",
-            // textShadow: "0px 1px 2px rgba(0, 0, 0, 0.24)"
-          }}>
-          <Typography variant='h1'>Freshness Delivered Daily!</Typography>
+        <Grid container direction={'column'} xs={6} alignItems="start" justifyContent={"centre"}
+          backgroundColor="#006614"
+          height={'100%'}
+          ml="35%"
+        // gap={2}
+        >
+          <Header>Freshness Delivered Daily!</Header>
           {/* <Typography variant='body1'>welcome to GROOVEGO</Typography> */}
-          <Grid container item xs={2} direction={'row'} 
-          // backgroundColor=" red"
-           alignItems={"center"} gap={3} width={'45vh'}>
+          <Grid item xs={2} direction={'row'}
+            // backgroundColor=" red"
+            alignItems={"center"} gap={3} width={'45vh'}>
 
-            <Button  sx={{
+            <Button sx={{
               borderRadius: '30px',
               // backgroundColor: "#243f2f ",
               backgroundColor: "rgba(12, 208, 92, 0.7)",
@@ -53,13 +61,7 @@ const BannerCard = () => {
               <ShoppingCartOutlined />
               Explore
             </Button>
-            <Typography
-              variant='body1'
-              sx={{
-                color: "#EBFFDC",
-
-              }}
-            >2500+ products</Typography>
+            <SubTitle> 2500+ products</SubTitle>
           </Grid>
 
         </Grid>
