@@ -1,32 +1,44 @@
 import React, { useState } from 'react';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const AddressPage = () => {
-  const [street, setStreet] = useState('');
+  const [addressline,setAddressline] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
+  const [pincode, setPinCode] = useState('');
   const [country, setCountry] = useState('');
+  const [userid, setUserid] = useState(localStorage.getItem('userid'));
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const userrole = location.state?.userrole || '';
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const addressData = {
-      street,
+      addressline,
       city,
       state,
-      zip,
-      country
+      pincode,
+      country,
+      userid
     };
 
     try {
-      const response = await axios.post('/VENDOR/addAddress', addressData); // Update with your backend endpoint
-      if (response.status === 200) {
-        alert('Address added successfully!');
-        navigate('/vendor'); // Redirect to vendor dashboard or another appropriate page
-      } else {
+      const response = await axios.put('/USERS/addAddress', addressData); // Update with your backend endpoint
+      if (response.status === 200 ) {
+        if(userrole === 'vendor'){
+          alert('Address added successfully!');
+          navigate('/vendor'); // Redirect to vendor dashboard or another appropriate page
+        }else if(userrole === 'delivery'){
+          alert('Address added successfully!');
+          navigate('/delivery');
+        } else{
+          alert('Address added successfully!');
+          navigate('/user');
+        }
+      } else{
         console.error('Address submission failed', response.data);
       }
     } catch (error) {
@@ -40,12 +52,12 @@ const AddressPage = () => {
         <Typography variant="h4" gutterBottom>Add Address</Typography>
         <form onSubmit={handleSubmit}>
           <TextField
-            label="Street"
+            label="Addressline"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
+            value={addressline}
+            onChange={(e) => setAddressline(e.target.value)}
           />
           <TextField
             label="City"
@@ -64,12 +76,12 @@ const AddressPage = () => {
             onChange={(e) => setState(e.target.value)}
           />
           <TextField
-            label="Zip Code"
+            label="Pin Code"
             variant="outlined"
             fullWidth
             margin="normal"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
+            value={pincode}
+            onChange={(e) => setPinCode(e.target.value)}
           />
           <TextField
             label="Country"

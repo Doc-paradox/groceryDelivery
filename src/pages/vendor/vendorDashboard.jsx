@@ -16,7 +16,7 @@ const VendorDashboard = () => {
       <Grid display={'flex'} flexDirection={'column'} >
         <Box sx={{ marginLeft: '25%' }}>
           <ProductCard />
-          <AddProduct />
+          {/* <AddProduct /> */}
         </Box>
       </Grid>
     </Box>

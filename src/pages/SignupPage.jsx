@@ -11,7 +11,7 @@ const SignupPage = () => {
   const [userpassword, setUserPassword] = useState('');
   const navigate = useNavigate();
 
-  const userTypes = ['user', 'vendor', 'delivery Person']
+  const userTypes = ['user', 'vendor', 'delivery']
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,9 +24,9 @@ const SignupPage = () => {
       const data = response.data;
       if (response.status === 200) {
         // Redirect to login page or dashboard after successful signup
-        if (userrole === 'vendor' || userrole === 'delivery Person') {
+        if (userrole === 'vendor' || userrole === 'delivery') {
           // navigate('/login');
-          navigate('/address');
+          navigate('/address',{state:{userrole}});
         } else {
           navigate('/login');
           alert("Sign up successful")
@@ -87,8 +87,8 @@ const SignupPage = () => {
           color="primary"
           fullWidth
           sx={{ mt: 2, mb: 2 }}
-        >
-          Sign Up
+         >
+          Sign Up 
         </Button>
         <small>Already have an account? <Link to="/login">Log in</Link></small>
       </Box>

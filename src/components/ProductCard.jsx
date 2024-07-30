@@ -46,7 +46,7 @@ const CategoryDescription = styled(Typography)(({ theme }) => ({
   fontSize: '0.9rem',
 }));
 
-const ProductCard = ({ productid, title, description, price, stock }) => {
+const ProductCard = ({ productid, title, description,category, price, stock }) => {
 
   const handleAddToCart = async () => {
     try {
@@ -61,7 +61,7 @@ const ProductCard = ({ productid, title, description, price, stock }) => {
         },
 
       });
-      console.log(response.data);
+      // console.log(response.data);
       alert('Product added to cart');
     } catch (error) {
       console.error('Error adding product to cart', error);
@@ -84,6 +84,7 @@ const ProductCard = ({ productid, title, description, price, stock }) => {
         </CategoryTitle>
         <CategoryDescription variant="body2" gutterBottom >
           <Typography>{description}</Typography>
+          <Typography>{category}</Typography>
           <Typography>Price:{price}</Typography>
           <Typography>Available:{stock}</Typography>
         </CategoryDescription>

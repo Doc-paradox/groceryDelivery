@@ -28,6 +28,7 @@ const ViewProducts = () => {
             productid={product.productid}
             title={product.productname}
             description={product.productdescription}
+            category={product.category}
             price={product.price}
             stock={product.stock}
           />
