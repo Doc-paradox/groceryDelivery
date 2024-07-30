@@ -49,16 +49,7 @@ const HomePage = () => {
     return (
         <Box>
             <Navbar />
-            {/* <Typography  sx={{
-                fontFamily: '"Quicksand", sans-serif',
-                fontWeight: 'bolder',
-                fontSize: '7vh',
-                textAlign: 'center',
-                marginLeft:'35%',
-                textDecoration:'none'
-            }}>
-                Welcome to GroveGo!
-            </Typography> */}
+
             <Grid container direction={'row'} gap={22} padding="10px" justifyContent="space-between" alignItems="center" sx={{
                 backgroundColor: "#eff5ee",
                 height: '12vh',
@@ -97,8 +88,9 @@ const HomePage = () => {
             </Box> */}
             <BannerCard />
             <Grid padding='35px'>
-
-                <DisplayCard />
+                <Box mb='20px'>
+                    <DisplayCard />
+                </Box>
                 <StyledBox>
                     Heyy
                 </StyledBox>
@@ -108,9 +100,7 @@ const HomePage = () => {
                         From 06:00 AM To 10:00 PM
                     </Box>
                 </Grid>
-
                 <Grid container spacing={2} columnGap={3} rowGap={8} >
-
                     <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>
                         {/* <ProductCard/>
                     <ProductCard/>
@@ -118,7 +108,6 @@ const HomePage = () => {
                     <ProductCard/>    */}
                         <ViewProducts />
                         <ViewProducts />
-
                     </Box>
 
                     {/* <Box sx={{ width: '80%', height: '25vh', marginLeft: '10%', marginTop: '10%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', gap: '2%' }}>

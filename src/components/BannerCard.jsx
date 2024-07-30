@@ -1,6 +1,7 @@
-import { ShoppingCartOutlined } from '@mui/icons-material'
+import { HandymanOutlined, ShoppingCartOutlined } from '@mui/icons-material'
 import { Box, Button, Card, Fab, Grid, styled, Typography } from '@mui/material'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Header = styled('Typopgraphy')(({ theme }) => ({
 
@@ -19,6 +20,11 @@ const SubTitle = styled('Typography')(({ theme }) => ({
 }))
 
 const BannerCard = () => {
+  const navigate = useNavigate();
+
+  const handleClick= () =>{
+    navigate('/products')
+  }
   return (
     <>
       <Grid container item xs={12} justify="center" alignItems="center"
@@ -31,7 +37,7 @@ const BannerCard = () => {
           backgroundColor: "#253f26"
         }}>
         <Grid container direction={'column'} xs={6} alignItems="start" justifyContent={"centre"}
-          backgroundColor="#006614"
+          // backgroundColor="#006614"
           height={'100%'}
           ml="35%"
         // gap={2}
@@ -40,7 +46,7 @@ const BannerCard = () => {
           {/* <Typography variant='body1'>welcome to GROOVEGO</Typography> */}
           <Grid item xs={2} direction={'row'}
             // backgroundColor=" red"
-            alignItems={"center"} gap={3} width={'45vh'}>
+            alignItems={"center"} gap={4} width={'45vh'}>
 
             <Button sx={{
               borderRadius: '30px',
@@ -57,7 +63,10 @@ const BannerCard = () => {
                 backgroundColor: "white",
                 color: '#243f2f',
               }
-            }}>
+            }}
+
+            onClick={handleClick}
+            >
               <ShoppingCartOutlined />
               Explore
             </Button>
