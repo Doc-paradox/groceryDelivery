@@ -1,17 +1,19 @@
 import React from 'react';
-import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, List, ListItem, ListItemIcon, ListItemText,styled } from '@mui/material';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+
 
 
 const SideBar = styled("Box")(({ theme }) => ({
   display: "flex",
-  width: "100%",
-  height: "70vw",
+  flexDirection: "column",
+  width: "8vw",
+  height: "100vh",
   borderRadius: "none",
-  // alignItems: "center",
+  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',
+  alignItems: "center",
   // justifyContent: "center",
-  backgroundColor: 'lightblue',
+  backgroundColor: theme.palette.background.default,
 }));
 
 const Sidebar = ({ menuItems }) => {

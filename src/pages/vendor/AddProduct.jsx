@@ -59,27 +59,27 @@ const AddProduct = () => {
   //   });
   // },[]);
 
-  useEffect(() => {
-    if (productid) {
-      // Fetch product details if productId is provided
-      axios.get(`/getAllproduct/${productid}`)
-        .then(response => {
-          const product = response.data;
-          setProductname(product.productname);
-          setProductdescription(product.productdescription);
-          setCategory(product.category);
-          setPrice(product.price);
-          setStock(product.stock);
-          setManufactutredate(product.manufactutredate);
-          setExpirydate(product.expirydate);
-          setVendorid(product.vendorid);
-        })
+  // useEffect(() => {
+  //   if (productid) {
+  //     // Fetch product details if productId is provided
+  //     axios.get(`/getAllproduct/${productid}`)
+  //       .then(response => {
+  //         const product = response.data;
+  //         setProductname(product.productname);
+  //         setProductdescription(product.productdescription);
+  //         setCategory(product.category);
+  //         setPrice(product.price);
+  //         setStock(product.stock);
+  //         setManufactutredate(product.manufactutredate);
+  //         setExpirydate(product.expirydate);
+  //         setVendorid(product.vendorid);
+  //       })
 
-        .catch(error => {
-          console.error('There was an error fetching the product details!', error);
-        });
-    }
-  }, [productid]);
+  //       .catch(error => {
+  //         console.error('There was an error fetching the product details!', error);
+  //       });
+  //   }
+  // }, [productid]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

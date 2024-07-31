@@ -92,11 +92,11 @@
 
 
 import React from 'react';
-import { AppBar, Box, Toolbar, Typography, styled } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { AppBar, Box, Button, Toolbar, Typography, styled } from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import PhoneIcon from '@mui/icons-material/Phone';
+
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -121,7 +121,28 @@ const ContactInfo = styled(Typography)(({ theme }) => ({
   },
 }));
 
+const NavButton = styled(Button)(({ theme }) => ({
+  backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.background.default,
+  '&:hover': {
+    backgroundColor: theme.palette.secondary.light,
+  },
+  margin: theme.spacing(1, 2),
+  fontWeight: 'bold',
+}));
+
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleSignup = () => {
+    navigate("/signup");
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+
   return (
     <StyledAppBar position="sticky">
       <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -140,10 +161,12 @@ const Navbar = () => {
             <AccessTimeIcon />
             Mon-Fri: 10:00 - 18:00
           </ContactInfo>
-          <ContactInfo>
-            <PhoneIcon />
-            +1 900 777525
-          </ContactInfo>
+          <NavButton onClick={handleSignup}>
+            Sign up
+          </NavButton>
+          <Button onClick={handleLogin} sx={{color:'white',fontWeight:'bold'}}>
+            Log in
+          </Button>
         </Box>
       </Toolbar>
     </StyledAppBar>

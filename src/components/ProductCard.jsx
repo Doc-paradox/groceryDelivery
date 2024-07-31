@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  maxWidth: 280,
+  width: '20vw',
   height: '50vh',
   margin: theme.spacing(2),
   borderRadius: '10px',
@@ -53,7 +53,7 @@ const ProductCard = ({ productid, title, description,category, price, stock }) =
       const userid = localStorage.getItem('userid'); // Get the logged-in user's ID
       // const productid = productid;
 
-      const response = await axios.post(`/USERS/addToCart/${userid}`, null, {
+       await axios.post(`/USERS/addToCart/${userid}`, null, {
         params: {
           // USERID: userid,
           PRODUCTID: productid, // Replace with actual product ID
@@ -82,9 +82,9 @@ const ProductCard = ({ productid, title, description,category, price, stock }) =
         <CategoryTitle variant="h6" component="h3">
           {title}
         </CategoryTitle>
-        <CategoryDescription variant="body2" gutterBottom >
-          <Typography>{description}</Typography>
-          <Typography>{category}</Typography>
+        <CategoryDescription variant="body2" gutterBottom>
+          {/* <Typography>{description}</Typography>
+          <Typography>{category}</Typography> */}
           <Typography>Price:{price}</Typography>
           <Typography>Available:{stock}</Typography>
         </CategoryDescription>
