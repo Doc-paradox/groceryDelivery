@@ -20,7 +20,8 @@ const LoginPage = () => {
       });
 
       const { userid, userrole } = response.data;
-      localStorage.setItem('userid', parseInt(userid)); // Store userid in local storage
+      localStorage.setItem('userid', parseInt(userid));
+      console.log(userid); // Store userid in local storage
       // alert(`Logged in as ${userrole}`);
       console.log(`Login successful, ${userrole},${userid}`);
       console.log(userrole);

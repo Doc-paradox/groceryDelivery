@@ -12,7 +12,7 @@ const ViewProducts = () => {
       try {
         const response = await axios.get('/getAllproduct');
         setProducts(response.data);
-        // console.log(response.data)
+        console.log(response.data)
       }
       catch (error) {
         console.error("There was an error fetching the products!", error);

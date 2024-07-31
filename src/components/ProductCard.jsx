@@ -53,7 +53,7 @@ const ProductCard = ({ productid, title, description,category, price, stock }) =
       const userid = localStorage.getItem('userid'); // Get the logged-in user's ID
       // const productid = productid;
 
-       await axios.post(`/USERS/addToCart/${userid}`, null, {
+      const response= await axios.post(`/USERS/addToCart/${userid}`, null, {
         params: {
           // USERID: userid,
           PRODUCTID: productid, // Replace with actual product ID
@@ -61,7 +61,7 @@ const ProductCard = ({ productid, title, description,category, price, stock }) =
         },
 
       });
-      // console.log(response.data);
+       console.log(response.data);
       alert('Product added to cart');
     } catch (error) {
       console.error('Error adding product to cart', error);

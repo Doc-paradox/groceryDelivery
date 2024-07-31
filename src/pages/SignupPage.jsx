@@ -22,7 +22,13 @@ const SignupPage = () => {
       });
 
       const data = response.data;
+      
       if (response.status === 200) {
+        const { userid, userrole } = response.data;
+      localStorage.setItem('userid', parseInt(userid));
+      console.log(userid);
+      console.log(`Signup successful, ${userrole},${userid}`);
+      console.log(userrole);
         // Redirect to login page or dashboard after successful signup
         if (userrole === 'vendor' || userrole === 'delivery') {
           // navigate('/login');

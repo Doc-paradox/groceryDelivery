@@ -9,7 +9,7 @@ const AddressPage = () => {
   const [state, setState] = useState('');
   const [pincode, setPinCode] = useState('');
   const [country, setCountry] = useState('');
-  const [userid, setUserid] = useState(localStorage.getItem('userid'));
+  const userid = localStorage.getItem('userid');
   const navigate = useNavigate();
   const location = useLocation();
   const userrole = location.state?.userrole || '';
@@ -26,6 +26,7 @@ const AddressPage = () => {
     };
 
     try {
+      console.log(userid);
       const response = await axios.put('/USERS/addAddress', addressData); // Update with your backend endpoint
       if (response.status === 200 ) {
         if(userrole === 'vendor'){

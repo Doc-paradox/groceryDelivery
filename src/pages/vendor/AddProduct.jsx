@@ -35,6 +35,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Button, Container, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { ArrowBackOutlined } from '@mui/icons-material';
 
 const AddProduct = () => {
   const { productid } = useParams(); // Assumes productId is passed as a route parameter
@@ -120,6 +121,24 @@ const AddProduct = () => {
   return (
     <Container maxWidth="sm">
       <Box sx={{ mt: 4 }}>
+      <ArrowBackOutlined
+      sx={{
+        fontSize: '8vh',
+        borderRadius: '50%',
+        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
+        color: '#3f51b5',
+        backgroundColor: 'white',
+        padding: '10px',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          cursor: 'pointer',
+          color: '#283593',
+          boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)',
+          transform: 'scale(1.05)'
+        }
+      }}
+      onClick={() => window.history.back()}
+    />
         <Typography variant="h4" gutterBottom>{productid ? 'Update Product' : 'Add New Product'}</Typography>
         {/* <ul>
                 {products.map(product => (
