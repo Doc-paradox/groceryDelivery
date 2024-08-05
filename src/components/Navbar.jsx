@@ -144,7 +144,7 @@ const Navbar = () => {
 
 
   return (
-    <StyledAppBar position="sticky">
+    <StyledAppBar >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <NavLink to="/">Home</NavLink>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Sidebar from '../../components/Sidebar';
-import { AccountCircle, AutoStories, EventNote, Inventory2, Person, ShoppingCart } from '@mui/icons-material';
+import { AccountCircle,  Inventory2,  ShoppingCart } from '@mui/icons-material';
 
 const userMenuItems = [
     { icon: <ShoppingCart />, path: "/vendor/orders" },

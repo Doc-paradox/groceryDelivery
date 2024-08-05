@@ -14,20 +14,18 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/USERS/login', {
+      const response = await axios.post(`/USERS/login`, {
         useremail: useremail,
         userpassword: userpassword,
-      });
-
-      const { userid, userrole } = response.data;
-      localStorage.setItem('userid', parseInt(userid));
-      console.log(userid); // Store userid in local storage
-      // alert(`Logged in as ${userrole}`);
-      console.log(`Login successful, ${userrole},${userid}`);
-      console.log(userrole);
-      const data = userrole;
+      },{withCredentials:true});
+      console.log(response.status);
+    
       if (response.status === 200) {
-        // Route based on user type
+        try{
+          const userroleResponse = await axios.get(`/USERS/getRole`,{withCredentials:true});
+          console.log(userroleResponse);
+          const data=userroleResponse.data;
+          // Route based on user type
         switch (data) {
           case 'admin':
             navigate('/admin');
@@ -42,7 +40,7 @@ const LoginPage = () => {
             console.log("Login successful", data);
             break;
           case 'delivery':
-            navigate('/delivery-dashboard');
+            navigate('/delivery');
             console.log("Login successful", data);
             break;
           default:
@@ -50,24 +48,32 @@ const LoginPage = () => {
             console.log("Login successful", data);
 
         }
+      }catch(error){
+        console.log("Error fetching user role",error);
+      }
 
       } else {
-        console.log('Login failed', data);
+        console.log('Cannot get user role');
       }
     } catch (error) {
       console.error('Error during login', error);
     }
   }
+
+
   return (
     <Box sx={{ justifyContent: 'center', alignItems: 'center', display: 'flex', height: '100vh' }}>
 
       <Box component="form" onSubmit={handleSubmit} sx={{
-        maxWidth: 400,
+        display: 'flex',
+        flexDirection:'column',
+        flexBasis:'100%',
+        flexWrap:'wrap',
+        flexGrow: 1,
+        maxWidth: 600,
+        minWidth:200,
         //  margin: 'auto', 
-        padding: 5,
-        //  marginTop: '15%', 
-        borderColor: 'black',
-        //  border: '1px solid', 
+        padding: 5,      
         borderRadius: '5%',
         boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.4)'
       }}>

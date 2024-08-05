@@ -2,9 +2,10 @@
 // ProductCarousel.js
 import React from 'react';
 import Slider from 'react-slick';
-import { Box, Paper, Typography, Button, Grid, } from '@mui/material';
+import { Box, Paper, Typography, Button, Grid, IconButton, } from '@mui/material';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 
 
 const products = [
@@ -76,23 +77,23 @@ const products = [
 //   fontWeight: 'bold'
 // }));
 
-// const CustomArrow = (props) => {
-//   const { className, style, onClick, icon } = props;
-//   return (
-//     <IconButton
-//       className={className}
-//       onClick={onClick}
-//       style={{
-//         ...style,
-//         display: 'block',
-//         color: 'black',
-//         zIndex: 1
-//       }}
-//     >
-//       {icon}
-//     </IconButton>
-//   );
-// };
+const CustomArrow = (props) => {
+  const { className, style, onClick, icon } = props;
+  return (
+    <IconButton
+      className={className}
+      onClick={onClick}
+      style={{
+        ...style,
+        display: 'block',
+        color: 'black',
+        zIndex: 1
+      }}
+    >
+      {icon}
+    </IconButton>
+  );
+};
 
 const ProductCarousel = () => {
   const settings = {
@@ -101,8 +102,8 @@ const ProductCarousel = () => {
     speed: 500,
     slidesToShow: 4, // Number of products to show at once
     slidesToScroll: 2,
-    // nextArrow: <CustomArrow icon={<ArrowForwardIosIcon />} />,
-    // prevArrow: <CustomArrow icon={<ArrowBackIosIcon />} />,
+    nextArrow: <CustomArrow icon={<ArrowForwardIos />} />,
+    prevArrow: <CustomArrow icon={<ArrowBackIos />} />,
   };
 
   return (

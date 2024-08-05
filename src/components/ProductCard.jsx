@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Button, Box, Grid, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import { imageMapping } from '../imageMapping';
 import axios from 'axios';
+import { ShoppingCartOutlined } from '@mui/icons-material';
 
 
 const StyledCard = styled(Card)(({ theme }) => ({
   width: '20vw',
-  height: '50vh',
+  height: '65vh',
   margin: theme.spacing(2),
-  borderRadius: '10px',
+  borderRadius: 15,
   transition: 'all 0.3s ease-in-out',
   '&:hover': {
     transform: 'translateY(-5px)',
@@ -36,97 +37,184 @@ const CategoryContent = styled(CardContent)(({ theme }) => ({
 
 const CategoryTitle = styled(Typography)(({ theme }) => ({
   fontWeight: 600,
+  textAlign:'start',
   marginBottom: theme.spacing(1),
 }));
 
 const CategoryDescription = styled(Typography)(({ theme }) => ({
   color: theme.palette.text.secondary,
-  textAlign: 'center',
+  textAlign: 'start',
   marginBottom: theme.spacing(2),
   fontSize: '0.9rem',
 }));
 
-const ProductCard = ({ productid, title, description,category, price, stock }) => {
+const ProductCard = ({ productid, title, description, category, price, stock }) => {
 
   const handleAddToCart = async () => {
     try {
-      const userid = localStorage.getItem('userid'); // Get the logged-in user's ID
-      // const productid = productid;
-
-      const response= await axios.post(`/USERS/addToCart/${userid}`, null, {
+      const response = await axios.post(`/USERS/addToCart`, null, {
         params: {
-          // USERID: userid,
-          PRODUCTID: productid, // Replace with actual product ID
+          PRODUCTID: productid, // Use the prop productid directly
           QUANTITY: 1, // Set quantity as needed
         },
-
+        withCredentials: true,
       });
-       console.log(response.data);
+      console.log(response.data);
       alert('Product added to cart');
     } catch (error) {
       console.error('Error adding product to cart', error);
     }
   };
 
-  const imageUrl = imageMapping[title];
+  // const imageUrl = imageMapping[title];
+  const imageUrl = imageMapping.categories[category]?.[title.toLowerCase()];
+
+  console.log('Category:', category);
+  console.log('Title:', title);
+  console.log('Image URL:', imageUrl);
 
   return (
-
-    <StyledCard>
+    <StyledCard display={'flex'} flexWrap={'wrap'} flexBiasis={'100%'}  flexGrow={1} >
+    <Grid>
       <CategoryImage
         component="img"
         image={imageUrl}
         alt={title}
       />
+      
+    </Grid>
+    <Grid sx={{marginTop:'50px'}}>
+
       <CategoryContent>
-        <CategoryTitle variant="h6" component="h3">
+        <CategoryTitle variant="h6" component="h3" >
           {title}
         </CategoryTitle>
         <CategoryDescription variant="body2" gutterBottom>
-          {/* <Typography>{description}</Typography>
-          <Typography>{category}</Typography> */}
-          <Typography>Price:{price}</Typography>
-          <Typography>Available:{stock}</Typography>
+          <Typography> {description}</Typography>
+          <Typography>{category}</Typography>
         </CategoryDescription>
-        <AddToCart onClick={handleAddToCart}>Add Cart</AddToCart>
+        <Box display={'flex'} flexDirection={'row'} gap={8} alignItems={'start'} >
+
+          <Typography paddingTop={'10px'}>Price: {price}</Typography>
+          {/* <Typography>Available: {stock}</Typography> */}
+        {/* <AddToCart onClick={handleAddToCart}>Add to Cart</AddToCart> */}
+        <IconButton>
+
+           <ShoppingCartOutlined onClick={handleAddToCart}>Add to Cart</ShoppingCartOutlined>
+           </IconButton>
+        </Box>
       </CategoryContent>
+    </Grid>
     </StyledCard>
   );
 };
 
 export default ProductCard;
 
-// const ProductCard = ({endpoint}) =>{
-//   const[categories,setCategories] = useState([]);
 
-//     useEffect(() =>{
-//         const fetchCategories = async () =>{
-//             try{
-//                 const response = await axios.get(endpoint);
-//                 setCategories(response.data);
-//             }catch(error){
-//                 console.error("error fetching categories :", error);
-//             }
-//         };
-//         fetchCategories();
-//     },[]);
-//   return(
+// import React from 'react';
+// import { Card, CardContent, CardMedia, Typography, Button, Box, Grid, IconButton } from '@mui/material';
+// import { styled } from '@mui/system';
+// import axios from 'axios';
+// import { imageMapping } from '../imageMapping';
+// import { ShoppingCartOutlined } from '@mui/icons-material';
+
+// const StyledCard = styled(Card)(({ theme }) => ({
+//   width: '20vw',
+//   height: '65vh',
+//   margin: theme.spacing(2),
+//   borderRadius: 15,
+//   transition: 'all 0.3s ease-in-out',
+//   display: 'flex',
+//   flexDirection: 'column',
+//   flexWrap: 'wrap',
+//   flexGrow: 1,
+//   '&:hover': {
+//     transform: 'translateY(-5px)',
+//     boxShadow: theme.shadows[8],
+//   },
+// }));
+
+// // const AddToCart = styled(Button)(({ theme }) => ({
+// //   backgroundColor: theme.palette.secondary.main,
+// //   color: 'white',
+// //   '&:hover': {
+// //     backgroundColor: theme.palette.secondary.dark,
+// //   }
+// // }));
+
+// const CategoryImage = styled(CardMedia)(({ theme }) => ({
+//   height: 200,
+//   objectFit: 'cover',
+// }));
+
+// const CategoryContent = styled(CardContent)(({ theme }) => ({
+//   padding: theme.spacing(2),
+//   textAlign: 'center',
+//   flexGrow: 1,
+//   display: 'flex',
+//   flexDirection: 'column',
+//   justifyContent: 'space-between',
+// }));
+
+// const CategoryTitle = styled(Typography)(({ theme }) => ({
+//   fontWeight: 600,
+//   textAlign: 'start',
+//   marginBottom: theme.spacing(1),
+// }));
+
+// const CategoryDescription = styled(Typography)(({ theme }) => ({
+//   color: theme.palette.text.secondary,
+//   textAlign: 'start',
+//   marginBottom: theme.spacing(2),
+//   fontSize: '0.9rem',
+// }));
+
+// const ProductCard = ({ productid, title, description, category, price, stock }) => {
+//   const handleAddToCart = async () => {
+//     try {
+//       const response = await axios.post(`/USERS/addToCart`, null, {
+//         params: {
+//           PRODUCTID: productid, // Use the prop productid directly
+//           QUANTITY: 1, // Set quantity as needed
+//         },
+//         withCredentials: true,
+//       });
+//       console.log(response.data);
+//       alert('Product added to cart');
+//     } catch (error) {
+//       console.error('Error adding product to cart', error);
+//     }
+//   };
+
+//   const imageUrl = imageMapping.categories[category]?.[title.toLowerCase()];
+
+//   return (
 //     <StyledCard>
 //       <CategoryImage
 //         component="img"
-//         image={"https://imgs.search.brave.com/0zXDrdUAQKYIdY9y386CGTi2oq9bbKq3b-nPCL1U43E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20v/cGhvdG8vMjAxNi8w/NC8xMy8wNy8xOC9i/bHVlYmVycmllcy0x/MzI2MTU0XzY0MC5q/cGc"}
+//         image={imageUrl}
 //         alt={title}
 //       />
 //       <CategoryContent>
-//         <CategoryTitle variant='h6' component='h3'>
+//         <CategoryTitle variant="h6" component="h3">
 //           {title}
 //         </CategoryTitle>
-//         <CategoryDescription variant='body2'>
-//           {title}
+//         <CategoryDescription variant="body2">
+//           <Typography> {description}</Typography>
+//           <Typography>{category}</Typography>
 //         </CategoryDescription>
+//         <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center">
+//           <Typography paddingTop={'10px'}>Price: ${price}</Typography>
+//           {/* <AddToCart onClick={handleAddToCart}>Add to Cart</AddToCart> */}
+//           <IconButton>
+
+//           <ShoppingCartOutlined onClick={handleAddToCart}>Add to Cart</ShoppingCartOutlined>
+//           </IconButton>
+//         </Box>
 //       </CategoryContent>
 //     </StyledCard>
-//   )
+//   );
 // };
 
 // export default ProductCard;

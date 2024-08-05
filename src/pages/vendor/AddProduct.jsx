@@ -1,44 +1,10 @@
-// import React, { useEffect, useState } from 'react'
-// import Navbar from '../../components/Navbar'
-// import axios from 'axios';
 
-// const AddProduct = () => {
-//   const [products,setProduct] = useState([]);
-
-//   useEffect(() =>{
-//         axios.get('/getAllproduct')
-//         .then(response => {
-//           console.log(response.data);
-//           setProduct(response.data);
-//         })
-//         .catch(error =>{
-//           console.error("There was an error fetching the products!", error);
-//         });
-//       },[]);
-//   return (
-//    <>
-//     <ul>
-//         {products.map(product => (
-//             <li key={product.id}>
-//                 <h2>{product.productname}</h2>
-//                 <p>Price: ${product.price}</p>
-//             </li>
-//         ))}
-//     </ul>
-//    </>
-//   )
-// }
-
-// export default AddProduct
-
-import React, { useState, useEffect } from 'react';
-import { Box, Button, Container, TextField, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Button, Container, Grid, IconButton, TextField, Typography, Snackbar } from '@mui/material';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { ArrowBackOutlined } from '@mui/icons-material';
 
 const AddProduct = () => {
-  const { productid } = useParams(); // Assumes productId is passed as a route parameter
   const [productname, setProductname] = useState('');
   const [productdescription, setProductdescription] = useState('');
   const [category, setCategory] = useState('');
@@ -48,63 +14,26 @@ const AddProduct = () => {
   const [expirydate, setExpirydate] = useState('');
   const [vendorid, setVendorid] = useState(localStorage.getItem('userid'));
 
-  // const [products, setProducts] = useState([]);
-
-  // useEffect(() =>{
-  //   axios.get('/getAllProduct')
-  //   .then(response => {
-  //     setProducts(response.data);
-  //   })
-  //   .catch(error =>{
-  //     console.error("There was an error fetching the products!", error);
-  //   });
-  // },[]);
-
-  // useEffect(() => {
-  //   if (productid) {
-  //     // Fetch product details if productId is provided
-  //     axios.get(`/getAllproduct/${productid}`)
-  //       .then(response => {
-  //         const product = response.data;
-  //         setProductname(product.productname);
-  //         setProductdescription(product.productdescription);
-  //         setCategory(product.category);
-  //         setPrice(product.price);
-  //         setStock(product.stock);
-  //         setManufactutredate(product.manufactutredate);
-  //         setExpirydate(product.expirydate);
-  //         setVendorid(product.vendorid);
-  //       })
-
-  //       .catch(error => {
-  //         console.error('There was an error fetching the product details!', error);
-  //       });
-  //   }
-  // }, [productid]);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const productData = {
-      productname: productname,
-      productdescription: productdescription,
-      category: category,
+      productname,
+      productdescription,
+      category,
       price: parseFloat(price),
       stock: parseInt(stock),
-      manufactutredate: manufactutredate,
-      expirydate: expirydate,
+      manufactutredate,
+      expirydate,
       vendorid: parseInt(vendorid)
     };
 
-
     try {
-
-      if (productid) {
-        await axios.put(`/updateProductDescPrice/${productid}`, productData);
-        alert('Product updated successfully!');
-      } else {
-        await axios.post('/addProduct', productData);
-        alert('Product added successfully!');
-      }
+      await axios.post('/addProduct', productData, { withCredentials: true });
+      setSnackbarMessage('Product added successfully!');
+      setSnackbarOpen(true);
       // Clear the form
       setProductname('');
       setProductdescription('');
@@ -114,113 +43,120 @@ const AddProduct = () => {
       setManufactutredate('');
       setExpirydate('');
     } catch (error) {
-      console.error('There was an error adding/updating the product!', error);
+      setSnackbarMessage('Error adding product!');
+      setSnackbarOpen(true);
+      console.error('There was an error adding the product!', error);
     }
   };
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ mt: 4 }}>
-      <ArrowBackOutlined
-      sx={{
-        fontSize: '8vh',
-        borderRadius: '50%',
-        boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
-        color: '#3f51b5',
-        backgroundColor: 'white',
-        padding: '10px',
-        transition: 'all 0.3s ease',
-        '&:hover': {
-          cursor: 'pointer',
-          color: '#283593',
-          boxShadow: '0px 6px 15px rgba(0, 0, 0, 0.2)',
-          transform: 'scale(1.05)'
-        }
-      }}
-      onClick={() => window.history.back()}
+    <Box padding='20px' >
+    <Grid container>
+      <Grid item xs={12} md={1} flexWrap={'wrap'} sx={{ position: 'sticky', top: '30px' }}>
+        <IconButton onClick={() => window.history.back()} sx={{
+          fontSize: '6vh', borderRadius: '50%', boxShadow: 3, color: 'rgba(0, 0, 0, 0.7)',
+          '&:hover': {
+            cursor: 'pointer',
+            color: 'rgba(0, 0, 0, 0.9)'
+          }
+        }}>
+          <ArrowBackOutlined />
+        </IconButton>
+      </Grid>
+      <Grid container justifyContent="center"  height="100vh">
+        <Grid item xs={12} sm={8} md={6}>
+          <Box p={3} border={1} borderRadius={2} borderColor="grey.300" bgcolor="background.paper">
+            <Typography variant="h4" gutterBottom>
+              Add New Product
+            </Typography>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                label="Product Name"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={productname}
+                onChange={(e) => setProductname(e.target.value)}
+              />
+              <TextField
+                label="Product Description"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={productdescription}
+                onChange={(e) => setProductdescription(e.target.value)}
+              />
+              <TextField
+                label="Category"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+              />
+              <TextField
+                label="Price"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+              />
+              <TextField
+                label="Stock"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="number"
+                value={stock}
+                onChange={(e) => setStock(e.target.value)}
+              />
+              <TextField
+                label="Manufacture Date"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="date"
+                value={manufactutredate}
+                onChange={(e) => setManufactutredate(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+              />
+              <TextField
+                label="Expiry Date"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                type="date"
+                value={expirydate}
+                onChange={(e) => setExpirydate(e.target.value)}
+                InputLabelProps={{ shrink: true }}
+              />
+              <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+                Add Product
+              </Button>
+            </form>
+          </Box>
+        </Grid>
+      </Grid>
+    </Grid>
+    <Snackbar
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      open={snackbarOpen}
+      autoHideDuration={6000}
+      onClose={handleSnackbarClose}
+      message={snackbarMessage}
+      action={
+        <Button color="inherit" onClick={handleSnackbarClose}>
+          Close
+        </Button>
+      }
     />
-        <Typography variant="h4" gutterBottom>{productid ? 'Update Product' : 'Add New Product'}</Typography>
-        {/* <ul>
-                {products.map(product => (
-                    <li key={product.id}>
-                        <h2>{product.name}</h2>
-                        <p>Price: ${product.price}</p>
-                    </li>
-                ))}
-            </ul> */}
-        <form onSubmit={handleSubmit}>
-          <TextField
-            label="Product Name"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={productname}
-            onChange={(e) => setProductname(e.target.value)}
-          />
-          <TextField
-            label="Product Description"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={productdescription}
-            onChange={(e) => setProductdescription(e.target.value)}
-          />
-          <TextField
-            label="Category"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          />
-          <TextField
-            label="Price"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            type="number"
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-          />
-          <TextField
-            label="Stock"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            type="number"
-            value={stock}
-            onChange={(e) => setStock(e.target.value)}
-          />
-          <TextField
-            label="Manufacture Date"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            type="date"
-            value={manufactutredate}
-            onChange={(e) => setManufactutredate(e.target.value)}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <TextField
-            label="Expiry Date"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            type="date"
-            value={expirydate}
-            onChange={(e) => setExpirydate(e.target.value)}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-          <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-            {productid ? 'Update Product' : 'Add Product'}
-          </Button>
-        </form>
-      </Box>
-    </Container>
+  </Box>
   );
 };
 

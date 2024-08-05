@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 const SideBar = styled("Box")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
-  width: "8vw",
+  width: "5vw",
   height: "100vh",
   borderRadius: "none",
   boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.5)',
   alignItems: "center",
+  color:'black',
   // justifyContent: "center",
   backgroundColor: theme.palette.background.default,
 }));

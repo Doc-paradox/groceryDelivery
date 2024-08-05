@@ -1,37 +1,58 @@
 import React, { useState } from 'react';
-import { Button, Popover, Box, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
-import { Shop, SetMealOutlined, LocalOffer, Restaurant, BakeryDining, LocalDrink, GridView } from '@mui/icons-material';
+import { Button, Menu, MenuItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Shop, SetMealOutlined, LocalOffer, Restaurant, SetMeal, BakeryDining, LocalDrink, GridView, Menu as MenuIcon } from '@mui/icons-material';
 
 const DropdownMenu = () => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [open, setOpen] = useState(false);
 
-    const handlePopoverOpen = (event) => {
+    const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
-        setOpen(true);
     };
 
-    const handlePopoverClose = () => {
-        setOpen(false);
+    const handleClose = () => {
+        setAnchorEl(null);
     };
+
+    const categories = [
+        { name: 'Shop', icon: <Shop /> },
+        { name: 'Vegetables', icon: <SetMealOutlined /> },
+        { name: 'Fresh Fruit', icon: <LocalOffer /> },
+        { name: 'Meat', icon: <Restaurant /> },
+        { name: 'Seafood', icon: <SetMeal /> },
+        { name: 'Baking', icon: <BakeryDining /> },
+        { name: 'Drinks', icon: <LocalDrink /> },
+        { name: 'Other', icon: <GridView /> },
+    ];
 
     return (
         <div>
             <Button
-                aria-owns={open ? 'mouse-over-popover' : undefined}
+                aria-controls="category-menu"
                 aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}
-            >
-                Category
-            </Button>
-            <Popover
-                id="mouse-over-popover"
-                sx={{
-                    pointerEvents: 'none',
+                onClick={handleClick}
+                onMouseEnter={handleClick}
+                sx={{ 
+                    color: 'white', 
+                    height:'4vw',
+                    width:'15vw',
+                    fontSize: '1.8vw',
+                    backgroundColor: '#1e4620', 
+                    '&:hover': { backgroundColor: '#2a6330' }
                 }}
-                open={open}
+            >
+                <MenuIcon sx={{ mr: 1,fontSize:'2vw' }} />
+                Categories
+            </Button>
+            <Menu
+                id="category-menu"
                 anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+                MenuListProps={{
+                    onMouseEnter: handleClick,
+                    onMouseLeave: handleClose
+                }}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',
@@ -39,65 +60,17 @@ const DropdownMenu = () => {
                 transformOrigin={{
                     vertical: 'top',
                     horizontal: 'left',
-                }}
-                PaperProps={{
-                    onMouseEnter: () => setOpen(true),
-                    onMouseLeave: handlePopoverClose,
-                }}
-                transitionDuration={{
-                    enter: 500, // Increase the enter duration to 500ms
-                    exit: 500,  // Increase the exit duration to 500ms
-                }}
-                onClose={handlePopoverClose}
-                disableRestoreFocus
+                }}  
             >
-                <Box sx={{ p: 2, display: 'flex' }}>
-                    <Box sx={{ mr: 4 }}>
-                        <List>
-                            <ListItem button>
-                                <ListItemIcon><Shop /></ListItemIcon>
-                                <ListItemText primary="Shop" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemIcon><SetMealOutlined /></ListItemIcon>
-                                <ListItemText primary="Vegetables" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemIcon><LocalOffer /></ListItemIcon>
-                                <ListItemText primary="Fresh Fruit" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemIcon><Restaurant /></ListItemIcon>
-                                <ListItemText primary="Meat" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemIcon><BakeryDining /></ListItemIcon>
-                                <ListItemText primary="Baking" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemIcon><LocalDrink /></ListItemIcon>
-                                <ListItemText primary="Drinks" />
-                            </ListItem>
-                            <ListItem button>
-                                <ListItemIcon><GridView /></ListItemIcon>
-                                <ListItemText primary="Other" />
-                            </ListItem>
-                        </List>
-                    </Box>
-                    <Box>
-                        <Typography variant="h6">Grid Layout</Typography>
-                        <Typography variant="body1">Small</Typography>
-                        <Typography variant="body1">Medium</Typography>
-                        <Typography variant="body1">Large</Typography>
-                        <Typography variant="body1">Extra Large</Typography>
-                        <Typography variant="h6" sx={{ mt: 2 }}>Product Layout</Typography>
-                        <Typography variant="body1">2 columns</Typography>
-                        <Typography variant="body1">2 columns + sidebar</Typography>
-                        <Typography variant="body1">3 columns</Typography>
-                        {/* Add more categories as needed */}
-                    </Box>
-                </Box>
-            </Popover>
+                {categories.map((category) => (
+                    <MenuItem key={category.name} onClick={handleClose}>
+                        <ListItemIcon sx={{ color: '#00c853' }}>
+                            {category.icon}
+                        </ListItemIcon>
+                        <ListItemText primary={category.name} />
+                    </MenuItem>
+                ))}
+            </Menu>
         </div>
     );
 };

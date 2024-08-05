@@ -4,9 +4,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Header = styled('Typopgraphy')(({ theme }) => ({
-
+ 
   fontFamily: theme.typography.fontFamily,
-  fontSize: theme.typography.h1.fontSize,
+  fontSize: '5rem',
   fontWeight: theme.typography.h1.fontWeight,
   color: "#EBFFDC",
 
@@ -36,17 +36,18 @@ const BannerCard = () => {
           backgroundSize: "contain",
           backgroundColor: "#253f26"
         }}>
-        <Grid container direction={'column'} xs={6} alignItems="start" justifyContent={"centre"}
-          // backgroundColor="#006614"
+        <Grid container direction={'column'} xs={6} alignItems="start" justifyContent={"center"}
+          //  backgroundColor="#006614"
           height={'100%'}
           ml="35%"
         // gap={2}
         >
-          <Header>Freshness Delivered Daily!</Header>
+          <Header >Freshness </Header>
+          <Header > Delivered Daily!</Header>
           {/* <Typography variant='body1'>welcome to GROOVEGO</Typography> */}
           <Grid item xs={2} direction={'row'}
             // backgroundColor=" red"
-            alignItems={"center"} gap={4} width={'45vh'}>
+            alignItems={"center"}  width={'45vh'}>
 
             <Button sx={{
               borderRadius: '30px',
@@ -58,6 +59,7 @@ const BannerCard = () => {
               fontWeight: "bold",
               fontSize: "20px",
               gap: '5px',
+              marginRight:'10px',
               justifyContent: "center",
               '&:hover': {
                 backgroundColor: "white",
@@ -70,11 +72,9 @@ const BannerCard = () => {
               <ShoppingCartOutlined />
               Explore
             </Button>
-            <SubTitle> 2500+ products</SubTitle>
+            <SubTitle variant="body1"> 2500+ products</SubTitle>
           </Grid>
-
         </Grid>
-
       </Grid>
     </>
   )

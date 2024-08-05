@@ -1,32 +1,10 @@
-// import React from 'react'
-// import Navbar from '../components/Navbar';
-// import { alpha, AppBar, Box, Button, Grid, InputBase, Paper, styled, Typography } from '@mui/material';
-// import Carousel from 'react-material-ui-carousel';
-// import ProductCard from '../components/ProductCard';
-// import { Link } from 'react-router-dom';
-// import BannerCard from '../components/BannerCard';
-// import ViewProducts from './user/ViewProducts';
-// import { AccountCircleOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material';
-// import DisplayCard from '../components/DisplayCard';
 
 
 
 
 
-// // const Header = styled('Typography')(({ theme }) => ({
-// //     fontfamily: 'Arial',
-// //     fontWeight: 'bolder',
-// //     fontSize: '7vh',
-// // }))
 
-// // const ContainerCard = styled('Card')(({ theme }) => ({
-// //     width: '35vh',
-// //     height: '45vh',
-// //     boxShadow: '-moz-initial',
-// //     backgroundColor: 'white',
-// //     borderRadius: "5%",
-// //     textAlign: 'center',
-// // }))
+
 
 // const StyledBox = styled(Box)(({ theme }) => ({
 //     backgroundColor: theme.palette.primary.main,
@@ -102,7 +80,7 @@
 //                 <Grid container spacing={2} columnGap={3} rowGap={8} >
 //                    {/* <ViewProducts/> */}
 
-                  
+
 
 //                 </Grid>
 
@@ -142,11 +120,14 @@
 
 import React from 'react';
 import Navbar from '../components/Navbar';
-import {  Box,  Grid,  styled } from '@mui/material';
+import { Box, Grid, styled, Typography } from '@mui/material';
 import BannerCard from '../components/BannerCard';
 import ViewProducts from './user/ViewProducts';
 import DisplayCard from '../components/DisplayCard';
 import MenuBox from '../components/MenuBox';
+import ProductCarousel from '../components/ProductCarousel';
+import delivery from '../assets/delivery.png';
+import Footer from '../components/Footer';
 // import Carousel from 'react-material-ui-carousel';
 // import ProductCard from '../components/ProductCard';
 // import { Link } from 'react-router-dom';
@@ -169,25 +150,64 @@ const HomePage = () => {
     return (
         <Box>
             <Navbar />
-            <MenuBox/>
+            <MenuBox />
             <BannerCard />
-            <Grid padding='35px'>
-                <Box mb='20px'>
+            <Grid container
+                padding='35px'
+                direction={'column'}
+                gap={5}
+            >
+                <Box >
                     <DisplayCard />
                 </Box>
-                <StyledBox padding='30px'>
+                <StyledBox padding='20px'>
+                    <Typography variant="h1" textAlign={'center'}>Best Seller</Typography>
                     <ViewProducts />
                 </StyledBox>
-                <Grid>
-                    <Box>
-                        Book Your Delivery To Your Convenience
-                        From 06:00 AM To 10:00 PM
+                <Grid container direction={'row'}
+                    justifyContent={'space-evenly'}
+
+                    paddingLeft={'5%'}
+                    paddingRight={'5%'}
+                    gap={2}
+                    sx={{
+                        height: '60vh',
+                        width: '100%',
+                        borderRadius: 5,
+                        // backgroundFilter: 'blur(5px)',
+                        background: 'linear-gradient(90deg, rgba(2, 23, 0, 1) 0%, rgba(0, 119, 55, 1) 65%, rgba(130, 238, 136, 1) 100%), url("https://as2.ftcdn.net/v2/jpg/05/40/82/11/1000_F_540821186_5gCn7JTDZrcK1XJlvR3Xeg4TTZAzvONC.jpg")',
+                        backgroundBlendMode: 'multiply',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                    }}
+
+                >
+
+                    <Box paddingTop={'10%'}
+                        sx={{
+                            // backgroundColor: 'pink', 
+                            color: 'white',
+                            height: '100%', width: '53vw',
+                        }}>
+
+                        <Typography variant="h1" fontFamily={'consolas,monospace'} >
+                            Book Your Delivery To Your Convenience
+                            <br></br>
+                        </Typography>
+                        <Typography variant="h3">
+                            From 06:00 AM To 10:00 PM
+                        </Typography>
+
                     </Box>
+                    <img src={delivery} alt="delivery"
+                        style={{ height: '65vh', width: '30vw', }}
+
+                    />
                 </Grid>
-                <Grid container spacing={2} columnGap={3} rowGap={8}>
-                    {/* <ViewProducts/> */}
-                </Grid>
+                <ProductCarousel />
+                
             </Grid>
+            <Footer/>
         </Box>
     )
 }

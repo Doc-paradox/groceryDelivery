@@ -1,36 +1,45 @@
 import React from 'react';
 import { Box, Card, CardContent, Typography, IconButton, Grid } from '@mui/material';
-import { Add, DeleteOutlined, Remove } from '@mui/icons-material';
+import { Add, Close, DeleteOutlined, Remove } from '@mui/icons-material';
 
-const CartItem = ({ item, onQuantityChange,onRemove }) => {
-  
+const CartItem = ({ item, onQuantityChange, onRemove }) => {
   return (
-    <Card sx={{ display: 'flex',flexDirection: 'column', alignItems: 'center', marginBottom: 2, width: '55%' }}>
-    <Grid container direction={'row'}>
-    <IconButton 
-  onClick={onRemove} 
-  aria-label="remove item"
-  sx={{ color: 'black' }}
->
-  <DeleteOutlined />
-</IconButton>
-      <Box component="img" sx={{ height: 80, width: 80, margin: 2 }} src={item.image} alt={item.productName} />
-      <CardContent sx={{ display: 'flex', flexDirection: 'column', width:'10vh'}}>
-        <Typography variant="h6">{item.productName}</Typography>
-        <Typography variant="body2">${item.price.toFixed(2)}</Typography>
-      </CardContent>
-    </Grid>
-    <Grid direction={'column'}>
-      <Box sx={{
-        display: 'flex', alignItems: 'center', marginRight: 2, borderRadius: '20px', border: '1px solid rbga(0, 0, 0, 0)',
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.4)'
-      }}>
-        <IconButton onClick={() => onQuantityChange(item.id, item.quantity - 1)}><Remove /></IconButton>
-        <Typography variant="body2">{item.quantity}</Typography>
-        <IconButton onClick={() => onQuantityChange(item.id, item.quantity + 1)}><Add /></IconButton>
-      </Box>
-      <Typography variant="body2" sx={{ width: 80, textAlign: 'right' }}>${(item.price * item.quantity).toFixed(2)}</Typography>
-    </Grid>
+    <Card sx={{ display: 'flex', flexDirection: 'column',flexBasis: '100%',flexWrap: 'wrap',
+      alignItems: 'center', marginBottom: 2, padding: 2, width: '100%', boxShadow: 3 }}>
+      <Grid container spacing={2} alignItems="center" >
+        <Grid item xs={12} sm={2} md={2} >
+          <IconButton 
+            onClick={() =>onRemove(item.id, item.quantity)} 
+            aria-label="remove item"
+            sx={{ color: 'error.main' }}
+          >
+            <Close />
+          </IconButton>
+        </Grid>
+        <Grid item xs={12} sm={2} md={2} >
+          <Box component="img" sx={{ height: 80, width: 80 }} src={item.image} alt={item.productName} />
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}  >
+          <CardContent>
+            <Typography variant="h6">{item.productName}</Typography>
+            <Typography variant="body1">${item.price.toFixed(2)}</Typography>
+          </CardContent>
+        </Grid>
+        <Grid item xs={12} sm={4} md={4}>
+          <Box sx={{ display: 'flex', alignItems: 'center',gap:'15px', width: '50%', padding: 1 }}>
+            <IconButton onClick={() => onQuantityChange(item.id, item.quantity - 1)}>
+              <Remove sx={{backgroundColor:'red',borderRadius:'50%',color:'white'}} />
+            </IconButton>
+            <Typography variant="h5">{item.quantity}</Typography>
+            <IconButton onClick={() => onQuantityChange(item.id, item.quantity + 1)}>
+              <Add sx={{backgroundColor:'green',borderRadius:'50%',color:'white'}} />
+            </IconButton>
+            <Typography variant="h5" sx={{ marginLeft: 2 }}>
+              ${(item.price * item.quantity).toFixed(2)}
+            </Typography>
+          </Box>
+        </Grid>
+      </Grid>
     </Card>
   );
 };
