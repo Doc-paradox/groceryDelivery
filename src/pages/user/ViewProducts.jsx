@@ -1,45 +1,3 @@
-// import { Grid } from '@mui/material';
-// import React, { useEffect, useState } from 'react'
-// import ProductCard from '../../components/ProductCard';
-// import axios from 'axios';
-
-// const ViewProducts = () => {
-
-//   const [products, setProducts] = useState([]);
-
-//   useEffect(() => {
-//     const fecthProducts = async () => {
-//       try {
-//         const response = await axios.get('/getAllproduct');
-//         setProducts(response.data);
-//         console.log(response.data)
-//       }
-//       catch (error) {
-//         console.error("There was an error fetching the products!", error);
-//       }
-//     };
-//     fecthProducts();
-//   }, []);
-//   return (
-//     <Grid container spacing={3} justifyContent="center">
-//       {products.map((product) => (
-//         <Grid item key={product.productid}>
-//           <ProductCard
-//             productid={product.productid}
-//             title={product.productname}
-//             description={product.productdescription}
-//             category={product.category}
-//             price={product.price}
-//             stock={product.stock}
-//           />
-//         </Grid>
-//       ))}
-//     </Grid>
-//   )
-// }
-
-// export default ViewProducts
-
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -51,6 +9,7 @@ const ViewProducts = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState(new Set());
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -92,7 +51,7 @@ const ViewProducts = () => {
     <Grid container spacing={3} padding={3}>
     {/* Back Arrow */}
     <Grid item xs={12} md={1} sx={{ position: 'sticky', top: '0px', }}>
-      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+      <Box display="flex" justifyContent="center" alignItems="start" height="100%">
         <IconButton
           onClick={() => window.history.back()}
           sx={{
@@ -117,13 +76,14 @@ const ViewProducts = () => {
         {/* Category Box */}
         <Grid item xs={12} md={3}>
           <Box
-            padding={3}
+            padding={2}
             border={1}
-            borderColor="grey.300"
+            borderColor="grey.1000"
             borderRadius="8px"
             height="50%"
+            width="100%"
           >
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h5" gutterBottom>
               Categories
             </Typography>
             <Divider sx={{ marginBottom: '15px' }} />
@@ -149,9 +109,9 @@ const ViewProducts = () => {
         {/* Product Box */}
         <Grid item xs={12} md={9}>
           <Box
-            padding={3}
+            padding={2}
             border={1}
-            borderColor="grey.300"
+            borderColor="grey.1000"
             borderRadius="8px"
             height="100%"
           >
@@ -188,3 +148,5 @@ const ViewProducts = () => {
 };
 
 export default ViewProducts;
+
+

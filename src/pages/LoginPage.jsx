@@ -41,6 +41,8 @@ const LoginPage = () => {
             break;
           case 'delivery':
             navigate('/delivery');
+            
+
             console.log("Login successful", data);
             break;
           default:

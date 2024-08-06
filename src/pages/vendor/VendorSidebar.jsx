@@ -6,7 +6,7 @@ const userMenuItems = [
     { icon: <ShoppingCart />, path: "/vendor/orders" },
     // { text: "Order", icon: <AutoStories />, path: "/vendor/catogery" },
     {  icon: <Inventory2 />, path: "/vendor/product" },
-    {  icon: <AccountCircle />, path: "/vendor/profile" },
+    {  icon: <AccountCircle />, path: "/profile" },
   ];
 const VendorSidebar = () => {
   return (

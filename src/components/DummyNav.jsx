@@ -1,5 +1,6 @@
 import { AccountCircleOutlined } from '@mui/icons-material';
 import { AppBar, Box, Grid, IconButton, Menu, MenuItem, styled, Typography } from '@mui/material';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -34,6 +35,8 @@ const DummyNav = () => {
 
   const handleLogout = () => {
     // Add your logout logic here
+    // const response = axios.get('/USERS/logout',{withCredentials:true});
+    // console.log(response);
     navigate('/'); // Redirect to login or home page after logout
     handleMenuClose();
   };

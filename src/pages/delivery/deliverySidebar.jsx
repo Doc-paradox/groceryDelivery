@@ -6,7 +6,7 @@ import Sidebar from '../../components/Sidebar';
 
 const userMenuItems = [
   { icon: <SpaceDashboardOutlined />, path: "/delivery/orders" },
-  { icon: <Person />, path: "/delivery/profile" },
+  { icon: <Person />, path: "/profile" },
 ];
 const DeliverySidebar = () => {
   return (

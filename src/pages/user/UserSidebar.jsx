@@ -8,7 +8,7 @@ const userMenuItems = [
   {  icon: <HomeOutlined />, path: "/" },
   {  icon: <ShoppingCartOutlined />, path: "/user/cart" },
   {  icon: <BookmarkBorderOutlined />, path: "/user/order" },
-  {  icon: <PersonOutlineOutlined />, path: "/user/profile" },
+  {  icon: <PersonOutlineOutlined />, path: "/profile" },
 ];
 const UserSidebar = () => {
   return (

@@ -6,6 +6,7 @@ import ViewProducts from './ViewProducts';
 import manwithBasket from '../../assets/manwithBasket.png';
 import MenuBox2 from '../../components/MenuBox2';
 import FeaturedCategories from '../../components/FeaturedCategories';
+import Footer from '../../components/Footer';
 
 const ProductItem = styled(Paper)({
   padding: '20px',
@@ -57,6 +58,7 @@ const UserDashboard = () => {
         </Grid>
         <FeaturedCategories/>
       </Grid>
+      <Footer/>
     </Box>
   );
 };

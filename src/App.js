@@ -16,6 +16,10 @@ import DeliveryDashboard from "./pages/delivery/deliveryDashboard";
 import ViewProducts from "./pages/user/ViewProducts";
 import ViewOrders from "./pages/user/ViewOrders";
 import UpdateOrders from "./pages/vendor/UpdateOrders";
+import ProfilePage from "./pages/ProfilePage";
+// import EditOrderPage from "./components/EditOrder";
+import ViewProducts2 from "./pages/user/ViewProduct2";
+import ViewCart2 from "./pages/user/ViewCart2";
 
 axios.defaults.baseURL = 'http://localhost:8080';
 
@@ -30,10 +34,14 @@ const App = () => (
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/user/profile" element={<ProfilePage />} />
         <Route path="/user" element={<UserDashboard />} />
         <Route path="/user/products" element={<ViewProducts />} />
+        <Route path="/user/products2" element={<ViewProducts2 />} />
         <Route path="/user/cart" element={<ViewCart />} />
+        <Route path="/user/cart2" element={<ViewCart2 />} />
         <Route path="/user/order" element={<ViewOrders />} />
+        {/* <Route path="/editOrder/:orderId" Component={EditOrderPage} /> */}
         <Route path="/vendor" element={<VendorDashboard />} />
         <Route path="/vendor/product" element={<AddProduct />} />
         <Route path="/vendor/orders" element={<UpdateOrders/>} />

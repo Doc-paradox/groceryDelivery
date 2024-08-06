@@ -16,6 +16,8 @@ const ViewCart = () => {
   const [addresses, setAddresses] = useState([]);
   const [selectedAddress, setSelectedAddress] = useState('');
   const [showNewAddressForm, setShowNewAddressForm] = useState(false);
+
+
   const [newAddress, setNewAddress] = useState({
     addressline: '',
     city: '',
@@ -27,11 +29,13 @@ const ViewCart = () => {
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [groupedSlots, setGroupedSlots] = useState([]);
 
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await axios.get(`/USERS/cartItems`,{withCredentials:true});
+        const response = await axios.get(`/USERS/cartItems`, { withCredentials: true });
         console.log(response.data);
         const parsedItems = response.data.map((itemString) => {
           const [productName, quantity, price] = itemString.split(',');
@@ -53,6 +57,7 @@ const ViewCart = () => {
       try {
         const response = await axios.get('/USERS/getSlot');
         setTimeSlots(response.data);
+        groupSlots(response.data);
       } catch (error) {
         console.error('There was an error fetching the timeslots!', error);
       }
@@ -60,7 +65,7 @@ const ViewCart = () => {
 
     const fetchAddresses = async () => {
       try {
-        const response = await axios.get(`/USERS/showAddress`,{withCredentials:true});
+        const response = await axios.get(`/USERS/showAddress`, { withCredentials: true });
         setAddresses(response.data);
         console.log(response.data);
         if (response.data.length > 0) {
@@ -76,6 +81,14 @@ const ViewCart = () => {
     fetchAddresses();
   }, []);
 
+  const groupSlots = (slots) => {
+    const groups = [[], [], [], []];
+    slots.forEach((slot, index) => {
+      groups[Math.floor(index / (slots.length / 4))].push(slot);
+    });
+    setGroupedSlots(groups);
+  };
+
   const handleQuantityChange = (id, newQuantity) => {
     const updatedItems = cartItems.map((item) =>
       item.id === id ? { ...item, quantity: Math.max(newQuantity, 1) } : item
@@ -83,36 +96,36 @@ const ViewCart = () => {
     setCartItems(updatedItems);
   };
 
-  const handleRemoveItem = async (itemId,quantity ) => {
-    console.log(itemId,quantity);
-    console.log(typeof itemId);
+  const handleRemoveItem = async (itemId, quantity) => {
+    console.log(itemId, quantity);
+    // console.log(typeof itemId);
     try {
       const productId = String(itemId).trim();
 
-    // Check if productId is valid
-    if (!productId || productId.length === 0) {
+      // Check if productId is valid
+      if (!productId || productId.length === 0) {
         console.error('Invalid product ID:', itemId);
         return;
-    }
+      }
 
-      await axios.put(`/USERS/removeFromCart`,null,{
-        
-          params:{
-            PRODUCTID:productId,
-            QUANTITY: quantity || null,
-          },withCredentials:true,
-        });
-        setCartItems(prevItems => {
-          if (quantity === null) {
-            return prevItems.filter(item => item.id !== itemId);
-          } else {
-            return prevItems.map(item =>
-              item.id === itemId
-                ? { ...item, quantity: item.quantity - quantity }
-                : item
-            ).filter(item => item.quantity > 0);
-          }
-        });
+      await axios.delete(`/USERS/removeFromCart`, null, {
+
+        params: {
+          PRODUCTID: productId,
+          // QUANTITY: quantity || null,
+        }, withCredentials: true,
+      });
+      setCartItems(prevItems => {
+        if (quantity === null) {
+          return prevItems.filter(item => item.id !== itemId);
+        } else {
+          return prevItems.map(item =>
+            item.id === itemId
+              ? { ...item, quantity: item.quantity - quantity }
+              : item
+          ).filter(item => item.quantity > 0);
+        }
+      });
     } catch (error) {
       console.error('There was an error removing the item!', error.response);
     }
@@ -125,8 +138,8 @@ const ViewCart = () => {
 
   const handleAddNewAddress = async () => {
     try {
-      const addressWithUserId = { ...newAddress};
-      const response = await axios.put(`/USERS/addAddress`,{withCredentials:true}, addressWithUserId);
+      const addressWithUserId = { ...newAddress };
+      const response = await axios.put(`/USERS/addAddress`, { withCredentials: true }, addressWithUserId);
       const newAddedAddress = response.data;
       setAddresses([...addresses, newAddedAddress]);
       setSelectedAddress(newAddedAddress.id);
@@ -158,7 +171,7 @@ const ViewCart = () => {
           SLOTID: timeSlot,
           DELIVERYDATE: deliveryDate,
           ADDRESSID: selectedAddress
-        },withCredentials:true,
+        }, withCredentials: true,
       });
 
       const orderId = response.data;
@@ -174,6 +187,25 @@ const ViewCart = () => {
   };
 
   const handleSnackbarClose = () => setSnackbarOpen(false);
+
+  const handleDateChange = (event) => {
+    setDeliveryDate(event.target.value);
+    setSelectedSlot(null);
+    setTimeSlot('');
+  };
+
+  const handleSlotSelect = (slotGroup) => {
+    setSelectedSlot(slotGroup);
+    setTimeSlot('');
+  };
+
+  const isSlotDisabled = (slot) => {
+    if (!deliveryDate) return true;
+    const now = new Date();
+    const selectedDate = new Date(deliveryDate);
+    const slotTime = new Date(selectedDate.toDateString() + ' ' + slot.starttime);
+    return selectedDate.toDateString() === now.toDateString() && slotTime < now;
+  };
 
   return (
     <Grid container spacing={2} padding='35px' direction={'row'}>
@@ -198,33 +230,55 @@ const ViewCart = () => {
       <Grid item xs={12} md={4} sx={{ position: 'sticky', top: '30px' }}>
         <Card sx={{ padding: 2 }}>
           <CardContent>
-            <FormControl fullWidth sx={{ marginBottom: 2 }}>
-              <InputLabel id="timeslot-select-label">Pick a time slot</InputLabel>
-              <Select
-                labelId="timeslot-select-label"
-                value={timeSlot}
-                onChange={(e) => setTimeSlot(e.target.value)}
-                label="Pick a time slot"
-              >
-                {/* Replace with actual time slots */}
-                {timeSlots.map((slot) => (
-                  <MenuItem key={slot.SLOTID} value={slot.slotid}>
-                    {slot.slotname} ({slot.starttime} - {slot.endtime})
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
             <TextField
               label="Delivery date"
               type="date"
               fullWidth
               value={deliveryDate}
-              onChange={(e) => setDeliveryDate(e.target.value)}
+              onChange={handleDateChange}
               sx={{ marginBottom: 2 }}
-              InputLabelProps={{
-              shrink: true,
-            }}
+              InputLabelProps={{ shrink: true }}
+              inputProps={{ min: new Date().toISOString().split('T')[0] }}
             />
+            <Typography variant="h6" sx={{ marginBottom: 2 }}>Select a time slot</Typography>
+            <Grid container spacing={2} sx={{ marginBottom: 2, }}>
+              {groupedSlots.map((group, index) => (
+                <Grid item xs={3} key={index}>
+                  <Button
+                    variant={selectedSlot === group ? "contained" : "outlined"}
+                    onClick={() => handleSlotSelect(group)}
+                    fullWidth
+                    sx={{
+                      height: '100%',  
+                      backgroundColor: !deliveryDate || group.every(isSlotDisabled) ? 'inherit' : '#cdee77',
+                      color: !deliveryDate || group.every(isSlotDisabled) ? 'inherit' : '#8abf2c',
+                      '&:hover': {
+                        backgroundColor: !deliveryDate || group.every(isSlotDisabled) ? 'inherit' : '#b4e639',
+                      },
+                    }}
+                    disabled={!deliveryDate || group.every(isSlotDisabled)}
+                  >
+                    Slot {index + 1}
+                  </Button>
+                </Grid>
+              ))}
+            </Grid>
+            {selectedSlot && (
+              <FormControl fullWidth sx={{ marginTop: 2, marginBottom: 2 }}>
+                <InputLabel>Pick a specific time</InputLabel>
+                <Select
+                  value={timeSlot}
+                  onChange={(e) => setTimeSlot(e.target.value)}
+                  label="Pick a specific time"
+                >
+                  {selectedSlot.map((slot) => (
+                    <MenuItem key={slot.SLOTID} value={slot.slotid} disabled={isSlotDisabled(slot)}>
+                      {slot.slotname} ({slot.starttime} - {slot.endtime})
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            )}
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMore />}
@@ -323,7 +377,7 @@ const ViewCart = () => {
               fullWidth
               sx={{ marginTop: 2 }}
               onClick={placeOrder}
-              disabled={!selectedAddress && !showNewAddressForm}
+              disabled={(!selectedAddress && !showNewAddressForm) || !timeSlot || !deliveryDate}
             >
               Proceed to Checkout
             </Button>

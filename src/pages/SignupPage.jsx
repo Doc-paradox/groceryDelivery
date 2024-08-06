@@ -161,7 +161,7 @@
 // export default SignupPage;
 
 import React, { useState } from 'react';
-import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography, Stepper, Step, StepLabel } from '@mui/material';
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography, Stepper, Step, StepLabel, InputLabel, Select, MenuItem } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AddressPage from './AddressPage';
@@ -186,6 +186,7 @@ const SignupPage = () => {
   const navigate = useNavigate();
 
   const steps = ['User Details', 'Address Details'];
+  const userTypes = ['user', 'vendor', 'delivery'];
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -213,8 +214,9 @@ const SignupPage = () => {
     };
     try {
       const response = await axios.post(`/USERS/addUser`, userAddressData);
+      console.log(response.data);
       if (response.status === 200) {
-        const { userrole } = response.data;
+        const  userrole  = response.data;
         // localStorage.setItem('userid', userid);
         alert('Signup successful!');
         if (userrole === 'vendor') {
@@ -253,20 +255,23 @@ const SignupPage = () => {
             <Typography variant="h5" component="h1" gutterBottom>
               Sign Up
             </Typography>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">User Type</FormLabel>
-              <RadioGroup
-                aria-label="user-type"
-                name="userrole"
-                value={userDetails.userrole}
-                onChange={handleUserDetailsChange}
-                sx={{ display: 'flex', flexDirection: 'row' }}
-              >
-                {['user', 'vendor', 'delivery'].map((type) => (
-                  <FormControlLabel key={type} value={type} control={<Radio />} label={type} />
-                ))}
-              </RadioGroup>
-            </FormControl>
+            <FormControl fullWidth>
+  <InputLabel id="user-type-label">User Type</InputLabel>
+  <Select
+    labelId="user-type-label"
+    id="user-type-select"
+    name="userrole"
+    value={userDetails.userrole}
+    onChange={handleUserDetailsChange}
+    label="User Type"
+  >
+    {['user', 'vendor', 'delivery'].map((type) => (
+      <MenuItem key={type} value={type}>
+        {type.charAt(0).toUpperCase() + type.slice(1)}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
             <TextField
               fullWidth
               label="Username"
