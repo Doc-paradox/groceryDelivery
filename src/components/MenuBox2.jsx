@@ -103,7 +103,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { AppBar, Box, Grid, IconButton, styled, Typography, Menu, MenuItem, Badge, List, ListItem, ListItemText, Divider } from '@mui/material';
-import { AccountCircleOutlined, EmailOutlined, ShoppingCartOutlined } from '@mui/icons-material';
+import { AccountCircleOutlined, EmailOutlined, FavoriteBorderOutlined, ShoppingCartOutlined } from '@mui/icons-material';
 import SearchBar from './SearchBar';
 import { useNavigate } from 'react-router-dom';
 import DropdownMenu from './DropdownMenu';
@@ -155,10 +155,10 @@ const MenuBox = () => {
     setOrderAnchorEl(null);
   };
 
-  const handleProfile = () => {
-    navigate('/user/profile'); // Adjust route as needed
-    handleMenuClose();
-  };
+  // const handleProfile = () => {
+  //   navigate('/user/profile'); // Adjust route as needed
+  //   handleMenuClose();
+  // };
   
   const handleProducts = () => {
     navigate('/user/products'); // Adjust route as needed
@@ -179,7 +179,10 @@ const MenuBox = () => {
   const handleCart = () => {
     navigate('/user/cart');
   };
-
+  const handleOrder = () => {
+    navigate('/user/order');
+  };
+  
   const handleOrderClick = (orderId) => {
     navigate(`/user/order`); // Adjust route as needed to view specific order details
     handleOrderMenuClose();
@@ -210,9 +213,15 @@ const MenuBox = () => {
           </IconButton>
           <IconButton
             sx={{ '&:hover': { cursor: 'pointer', color: '#b4e639' } }}
-            onClick={handleCart}
+            onClick={handleOrder}
           >
             <ShoppingCartOutlined />
+          </IconButton>
+          <IconButton
+            sx={{ '&:hover': { cursor: 'pointer', color: '#b4e639' } }}
+            onClick={handleCart}
+          >
+            <FavoriteBorderOutlined />
           </IconButton>
         </Box>
       </Grid>
@@ -234,7 +243,7 @@ const MenuBox = () => {
           },
         }}
       >
-        <MenuItem onClick={handleProfile}>Profile</MenuItem>
+        {/* <MenuItem onClick={handleProfile}>Profile</MenuItem> */}
         <MenuItem onClick={handleProducts}>Product</MenuItem>
         <MenuItem onClick={handleOrders}>Orders</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>

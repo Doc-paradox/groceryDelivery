@@ -49,7 +49,7 @@ const DummyNav = () => {
         </Box>
         <Box display='flex' alignItems='center' gap={2}>
           <IconButton
-            sx={{ '&:hover': { cursor: 'pointer', color: 'white' }, }}
+            sx={{ color:'black','&:hover': { cursor: 'pointer', color: 'white' }, }}
             onClick={handleProfileClick}
           >
             <AccountCircleOutlined />
@@ -74,7 +74,7 @@ const DummyNav = () => {
           },
         }}
       >
-        <MenuItem onClick={handleProfile}>Profile</MenuItem>
+        {/* <MenuItem onClick={handleProfile}>Profile</MenuItem> */}
         <MenuItem onClick={handleOrders}>Orders</MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>

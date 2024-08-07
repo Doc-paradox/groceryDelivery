@@ -147,19 +147,18 @@ const Navbar = () => {
     <StyledAppBar >
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/shop">Shop</NavLink>
-          <NavLink to="/blog">Blog</NavLink>
-          <NavLink to="/pages">Pages</NavLink>
+          <Typography>Home</Typography>
+          <Typography>Shop</Typography>
+          <Typography>About us</Typography>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <ContactInfo>
             <LocationOnIcon />
-            25 West 21th Street, Miami FL, USA
+            Anywhere delivry
           </ContactInfo>
           <ContactInfo>
             <AccessTimeIcon />
-            Mon-Fri: 10:00 - 18:00
+            Mon-Sun: 06:00 - 23:00
           </ContactInfo>
           <NavButton onClick={handleSignup}>
             Sign up
